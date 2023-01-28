@@ -11,8 +11,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      minlength: 6,
-      maxlength: 32,
+      minlength: 7,
       required: [true, "Password is required"],
     },
     name: {
@@ -26,6 +25,10 @@ const userSchema = new Schema(
     phone: {
       type: String,
       required: [true, "Mobile phone is required"],
+    },
+    avatarURL: {
+      type: String,
+      default: null,
     },
     token: {
       type: String,
