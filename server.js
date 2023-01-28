@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const fs = require("fs/promises");
 const path = require("path");
+const dotenv = require("dotenv");
+dotenv.config();
 
 mongoose.set('strictQuery', true);
 
@@ -30,7 +32,7 @@ mongoose
     app.listen(PORT, () => {
       createFolderIsNotExist(uploadDir);
       createFolderIsNotExist(storeImage);
-      console.log(`Server running. Use our API on port: ${PORT}`);
+      console.log('\x1b[46m', `==>Server running. Use our API on port: ${PORT}<==`, '\x1b[0m');
       console.log("Database connection successful");
     });
   })
