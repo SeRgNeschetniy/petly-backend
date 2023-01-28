@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-const { uploadImage } = require("./middlewares/cloudinary");
+const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
 dotenv.config();
 
@@ -24,6 +24,8 @@ app.use(express.static("public"));
     "https://cloudinary-devs.github.io/cld-docs-assets/assets/images/happy_people.jpg";
 
   const publicId = await uploadImage(imagePath);
+  const imageTag = await createImageTag(publicId);
+  console.log(imageTag);
 })();
 
 app.use((req, res) => {

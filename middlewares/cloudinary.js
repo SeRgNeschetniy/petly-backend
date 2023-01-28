@@ -41,4 +41,16 @@ const getAssetInfo = async (publicId) => {
   }
 };
 
-module.exports = { uploadImage, getAssetInfo };
+const createImageTag = (publicId) => {
+  const imageTag = cloudinary.image(publicId, {
+    transformation: [
+      { width: 250, height: 250, gravity: "faces", crop: "thumb" },
+      { radius: "max" },
+      { effect: "outline:10" },
+    ],
+  });
+
+  return imageTag;
+};
+
+module.exports = { uploadImage, getAssetInfo, createImageTag };
