@@ -6,10 +6,10 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
-dotenv.config();
-
 const authRouter = require("./routes/api/auth");
+const friendsRouter = require("./routes/api/friends");
 
+dotenv.config();
 const app = express();
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -31,6 +31,7 @@ app.use(express.static("public"));
 })();
 
 app.use("/api/auth", authRouter);
+app.use("/api/friends", friendsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
