@@ -17,3 +17,5 @@ module.exports = {
     getUserNotices,
     deleteUserNotice,
 }
+
+console.log('fun');
