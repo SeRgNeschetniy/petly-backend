@@ -18,6 +18,10 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name is required"],
     },
+    birthday: {
+      type: String,
+      default: "00.00.0000",
+    },
     city: {
       type: String,
       required: [true, "City is required"],
@@ -28,7 +32,7 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      default: null,
+      required: true,
     },
     token: {
       type: String,
