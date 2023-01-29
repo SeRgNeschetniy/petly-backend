@@ -1,15 +1,16 @@
 const express = require("express");
 const { getUserPets, addPet, removePet } = require("../../controllers/pets");
+const ctrlWrapper = require("../../helpers/ctrlWrapper");
 const authenticate = require("../../middlewares/authenticate");
 
 const router = express.Router();
 
 // ссилка на котроллен getPet
 
-router.get("/", authenticate, getUserPets);
+router.get("/", authenticate, ctrlWrapper(getUserPets));
 
-router.post("/", authenticate, addPet);
+router.post("/", authenticate, ctrlWrapper(addPet));
 
-router.delete("/:petId", authenticate, removePet);
+router.delete("/:petId", authenticate, ctrlWrapper(removePet));
 
 module.exports = router;

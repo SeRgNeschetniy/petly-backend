@@ -4,14 +4,12 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-
-const usersRouter = require("./routes/api/users");
 const petsRouter = require("./routes/api/pets");
+const authRouter = require("./routes/api/auth");
+
 const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
 dotenv.config();
-
-const authRouter = require("./routes/api/auth");
 
 const app = express();
 
