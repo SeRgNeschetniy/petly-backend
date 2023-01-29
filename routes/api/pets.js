@@ -1,16 +1,15 @@
 const express = require("express");
-const getUsersPet = require("../../controllers/pets/getUsersPets");
-const addPet = require("../../controllers/pets/addPet");
-const removePet = require("../../controllers/pets/removePet");
+const { getUserPets, addPet, removePet } = require("../../controllers/pets");
+const authenticate = require("../../middlewares/authenticate");
 
 const router = express.Router();
 
 // ссилка на котроллен getPet
 
-router.get("/", getUsersPet);
+router.get("/", authenticate, getUserPets);
 
-router.post("/", addPet);
+router.post("/", authenticate, addPet);
 
-router.delete("/:petId", removePet);
+router.delete("/:petId", authenticate, removePet);
 
 module.exports = router;

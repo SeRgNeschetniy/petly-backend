@@ -9,16 +9,11 @@ const usersRouter = require("./routes/api/users");
 const petsRouter = require("./routes/api/pets");
 const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
-
 dotenv.config();
 
 const authRouter = require("./routes/api/auth");
 
 const app = express();
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use("/api/user", usersRouter);
-app.use("/api/pets", petsRouter);
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -38,6 +33,9 @@ app.use(express.urlencoded({ extended: false })); // add pet from default form(k
 })();
 
 app.use("/api/auth", authRouter);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api/user", usersRouter);
+app.use("/api/mypets", petsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
