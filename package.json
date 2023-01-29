@@ -10,19 +10,20 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cloudinary": "^1.33.0",
     "cors": "2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "^16.0.3",
     "express": "4.17.1",
+    "gravatar": "^1.8.2",
     "joi": "^17.7.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.8.0",
     "morgan": "1.10.0",
     "nanoid": "3.3.4",
-    "swagger-ui-express": "^4.6.0",
     "passport": "^0.6.0",
-    "passport-google-oauth2": "^0.2.0"
-
+    "passport-google-oauth2": "^0.2.0",
+    "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
     "eslint": "7.19.0",

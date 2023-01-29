@@ -7,8 +7,12 @@ const swaggerDocument = require("./swagger.json");
 
 const usersRouter = require("./routes/api/users");
 const petsRouter = require("./routes/api/pets");
+const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
+
 
 dotenv.config();
+
+const authRouter = require("./routes/api/auth");
 
 const app = express();
 
@@ -24,12 +28,24 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false })); // add pet from default form(key:value), or true from another form.
 
+(async () => {
+  const imagePath =
+    "https://cloudinary-devs.github.io/cld-docs-assets/assets/images/happy_people.jpg";
+
+  const publicId = await uploadImage(imagePath);
+  const imageTag = await createImageTag(publicId);
+  console.log(imageTag);
+})();
+
+app.use("/api/auth", authRouter);
+
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message });
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
 });
 
 module.exports = app;

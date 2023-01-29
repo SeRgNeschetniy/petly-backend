@@ -39,8 +39,18 @@
         "post": {
           "tags": ["Auth"],
           "summary": "User registration",
-          "parameters": [],
+          
+          "parameters": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": "true",
+              "type": "string",
+              "description": "User's id"
+            }
+          ],
           "security": [{ "Bearer": [] }],
+
           "requestBody": {
             "description": "Registration's object",
             "required": true,
@@ -63,13 +73,11 @@
                 }
               }
             },
-            "400": {
-              "description": "Bad request (invalid request body)",
-              "content": {}
+            "400": { "description": "Bad Request"              
             },
-            "409": {
-              "description": "Provided email already exists",
-              "content": {}
+            "409": { "description": "Email in use"              
+            },
+            "500": { "description": "Server error"              
             }
           }
         }
@@ -78,8 +86,10 @@
         "post": {
           "tags": ["Auth"],
           "summary": "User login",
+
           "parameters": [],
           "security": [{ "Bearer": [] }],
+
           "requestBody": {
             "description": "Login object",
             "required": true,
@@ -103,12 +113,10 @@
               }
             },
             "400": {
-              "description": "Bad request (invalid request body)",
-              "content": {}
+              "description": "Bad request"              
             },
-            "409": {
-              "description": "Provided email already exists",
-              "content": {}
+            "401": {
+              "description": "Email or password is wrong"              
             }
           }
         }
@@ -117,37 +125,19 @@
         "post": {
           "tags": ["Auth"],
           "summary": "User logout",
+
           "parameters": [],
           "security": [{ "Bearer": [] }],
-          "requestBody": {
-            "description": "Logout object",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogoutRequest"
-                }
-              }
-            }
-          },
+
           "responses": {
-            "201": {
-              "description": "Successful operation",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/LogoutResponse"
-                  }
-                }
-              }
+            "204": {
+              "description": "Logout success"              
+            },            
+            "401": {
+              "description": "Missing header with authorization token"              
             },
-            "400": {
-              "description": "Bad request (invalid request body)",
-              "content": {}
-            },
-            "409": {
-              "description": "Provided email already exists",
-              "content": {}
+            "500": {
+              "description": "Server error"              
             }
           }
         }
@@ -157,17 +147,33 @@
       "schemas": {
         "RegistrationRequest": {
           "type": "object",
-          "required": ["email", "password"],
+          "required": ["email", "password", "name", "city", "phone"],
           "properties": {
             "email": {
               "type": "string",
               "description": "User's email",
-              "format": "email"
+              "format": "email",
+              "example": "bjohnson@gmail.com"
             },
             "password": {
               "type": "string",
               "description": "User's password",
-              "example": "qwerty123"
+              "example": "QWerty123"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "Boris Johnson"
+            },
+            "city": {
+              "type": "string",
+              "description": "User's city and region",
+              "example": "Brovary, Kyiv"
+            },
+            "phone": {
+              "type": "string",
+              "description": "User's phone",
+              "example": "+380981112233"
             }
           }
         },
@@ -176,22 +182,53 @@
           "items": {
             "type": "object",
             "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Boris Johnson"
+              },
               "email": {
                 "type": "string",
                 "description": "User's email",
-                "format": "email"
-              },
-              "userId": {
-                "type": "number",
-                "description": "User's id",
-                "example": "32143232436545474"
+                "format": "email",
+                "example": "bjohnson@gmail.com"
               }
+              
             }
           },
           "example": [
-            { "email": "1@gmail.com", "userId": "1" },
-            { "email": "2@gmail.com", "userId": "2" }
+            { "name": "Boris Johnson", "email": "bjohnson@gmail.com" }
           ]
+        },
+        "LoginRequest": {
+          "type": "object",
+          "required": ["email", "password", "name", "city", "phone"],
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email"
+            },
+            "password": {
+              "type": "string",
+              "description": "User's password"
+            }
+          }
+        },
+        "LoginResponse": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name"                
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email"
+              }              
+            }
+          }          
         }
       },
       "securitySchemes": {
