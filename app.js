@@ -22,14 +22,16 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false })); // add pet from default form(key:value), or true from another form.
 
-(async () => {
-  const imagePath =
-    'https://cloudinary-devs.github.io/cld-docs-assets/assets/images/happy_people.jpg';
 
-  const publicId = await uploadImage(imagePath);
-  const imageTag = await createImageTag(publicId);
-  console.log(imageTag);
-})();
+ (async () => {
+   const imagePath =
+     "https://cloudinary-devs.github.io/cld-docs-assets/assets/images/happy_people.jpg";
+
+   const publicId = await uploadImage(imagePath);
+   const imageTag = await createImageTag(publicId);
+   console.log(imageTag);
+ })();
+
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/auth', authRouter);
