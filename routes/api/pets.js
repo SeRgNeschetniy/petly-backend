@@ -1,6 +1,7 @@
 const express = require("express");
 const getUsersPet = require("../../controllers/pets/getUsersPets");
 const addPet = require("../../controllers/pets/addPet");
+const removePet = require("../../controllers/pets/removePet");
 
 const router = express.Router();
 
