@@ -28,7 +28,7 @@ const createFolderIsNotExist = async (folder) => {
 const { DB_HOST, PORT = 3000 } = process.env;
 
 mongoose
-  .connect(DB_HOST)
+  .connect(DB_HOST || 3000)
   .then(() => {
     app.listen(PORT, () => {
       createFolderIsNotExist(uploadDir);

@@ -4,7 +4,11 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
+
+const usersRouter = require("./routes/api/users");
+const petsRouter = require("./routes/api/pets");
 const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
+
 
 dotenv.config();
 
@@ -13,6 +17,8 @@ const authRouter = require("./routes/api/auth");
 const app = express();
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api/user", usersRouter);
+app.use("/api/pets", petsRouter);
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -20,6 +26,7 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: false })); // add pet from default form(key:value), or true from another form.
 
 (async () => {
   const imagePath =
