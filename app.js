@@ -6,8 +6,8 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const petsRouter = require("./routes/api/pets");
 const authRouter = require("./routes/api/auth");
-сonst noticeRouter = require("./routes/api/notices");
 const friendsRouter = require("./routes/api/friends");
+const noticesRouter = require("./routes/api/notices");
 
 //const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: false })); // add pet from default form(k
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/auth", authRouter);
 app.use("/api/mypets", petsRouter);
-app.use("/api/notice", noticeRouter);
+app.use("/api/notice", noticesRouter);
 app.use("/api/friends", friendsRouter);
 
 app.use((req, res) => {

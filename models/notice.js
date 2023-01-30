@@ -37,7 +37,7 @@ const noticeSchema = new Schema({
         required: [true, 'Category is required.']
     },
     petImage: {
-        type: String
+        type: String,
     },
     owner: {
        type: Schema.Types.ObjectId,
