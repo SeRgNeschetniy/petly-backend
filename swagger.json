@@ -38,7 +38,7 @@
       "/auth/register": {
         "post": {
           "tags": ["Auth"],
-          "summary": "User registration",
+          "summary": "Create a new user",
           
           "parameters": [
             {
@@ -102,7 +102,7 @@
             }
           },
           "responses": {
-            "201": {
+            "200": {
               "description": "Successful operation",
               "content": {
                 "application/json": {
@@ -124,7 +124,7 @@
       "/auth/logout": {
         "post": {
           "tags": ["Auth"],
-          "summary": "User logout",
+          "summary": "Log out user",
 
           "parameters": [],
           "security": [{ "Bearer": [] }],
@@ -135,6 +135,195 @@
             },            
             "401": {
               "description": "Missing header with authorization token"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/auth/current": {
+        "get": {
+          "tags": ["Auth"],
+          "summary": "Get information about the current user",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/notice/category/:categoryName": {
+        "get": {
+          "tags": ["Notices"],
+          "summary": "Receiving ads by category",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/notice/:id": {
+        "get": {
+          "tags": ["Notices"],
+          "summary": "Receiving one ad",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/notice/favorites/:id": {
+        "post": {
+          "tags": ["Notices"],
+          "summary": "Adding the ad to favorites",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/notice/favorites": {
+        "get": {
+          "tags": ["Notices"],
+          "summary": "Receiving ads of the authorized user added by him to the favorites",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/notice/favorites/{id}": {
+        "delete": {
+          "tags": ["Notices"],
+          "summary": "Deletion of the ad of the authorized user added to the favorites",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/notice/add": {
+        "post": {
+          "tags": ["Notices"],
+          "summary": "Adding ads according to the selected category",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/notice/notices": {
+        "get": {
+          "tags": ["Notices"],
+          "summary": "Receive ads of an authorized user created by the same user",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+      "/notice/notices/:id": {
+        "delete": {
+          "tags": ["Notices"],
+          "summary": "Deleting an ad of an authorized user created by the same user",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
             },
             "500": {
               "description": "Server error"              
