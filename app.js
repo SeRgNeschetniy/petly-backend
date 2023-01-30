@@ -6,7 +6,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const petsRouter = require("./routes/api/pets");
 const authRouter = require("./routes/api/auth");
-сonst noticeRouter = require("./routes/api/notices");
+const noticeRouter = require("./routes/api/notices");
 const friendsRouter = require("./routes/api/friends");
 
 //const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
