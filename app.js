@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const petsRouter = require("./routes/api/pets");
-const authRouter = require("./routes/api/auth");
 const friendsRouter = require("./routes/api/friends");
 const noticesRouter = require("./routes/api/notices");
 
