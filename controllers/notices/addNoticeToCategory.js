@@ -25,5 +25,4 @@ const addNoticeToCategory = async (req, res) => {
     res.status(201).json(newNotice);
 };
 
-
 module.exports = addNoticeToCategory;
