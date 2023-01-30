@@ -3,7 +3,7 @@ const passport = require("passport");
 const { nanoid } = require("nanoid");
 const bcrypt = require("bcrypt");
 
-const { User } = require("../models/users");
+const User = require("../models/users");
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, BASE_URL, PORT } = process.env;
 
@@ -22,18 +22,27 @@ const googleCallback = async (
   done
 ) => {
   try {
-    const { email, displayName } = profile;
+    const { email, displayName, picture, locate } = profile;
+
+    console.log({ profile });
+
     const user = await User.findOne({ email });
+    console.log(email, displayName);
     if (user) {
       done(null, user);
     }
+
     const password = nanoid();
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       email,
       name: displayName,
       password: hashPassword,
+      avatarURL: picture,
+      city: locate || "kyiv, Ukraine",
+      phone: "+3800000000000",
     });
+
     done(null, newUser);
   } catch (error) {
     done(error, false);
