@@ -1,4 +1,4 @@
-const { Pets } = require("../../models/pets");
+const { Pets } = require("../../models/pet");
 
 // тут не req.body а прийом з форми
 

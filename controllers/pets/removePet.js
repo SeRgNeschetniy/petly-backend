@@ -1,4 +1,4 @@
-const { Pets } = require("../../models/pets");
+const { Pets } = require("../../models/pet");
 
 const removePet = async (req, res) => {
   const { petId } = req.params;

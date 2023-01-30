@@ -1,4 +1,4 @@
-const { Pets } = require("../../models/pets");
+const { Pets } = require("../../models/pet");
 
 const getUsersPet = async (req, res, t) => {
   const { _id: owner } = req.user;
