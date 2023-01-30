@@ -13,15 +13,12 @@ const fs = require("fs/promises");
 const path = require("path");
 
 const friendsPath = path.join(__dirname, "sponsors.json");
+//const friendsPath = path.resolve("./sponsors.json");
 
-const getFriends = async () => {
-  try {
-    const data = await fs.readFile(friendsPath);
-    const friends = JSON.parse(data);
-    return friends;
-  } catch (error) {
-    console.log(error.message);
-  }
+const getFriends = async (req, res) => {
+  const data = await fs.readFile(friendsPath);
+  const friends = JSON.parse(data);
+  res.status(200).json(friends);
 };
 
 module.exports = getFriends;

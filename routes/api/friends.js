@@ -4,12 +4,6 @@ const getFriends = require("../../controllers/friends");
 
 const router = express.Router();
 
-router.get(
-  "/friends",
-  ctrlWrapper(async (req, res) => {
-    const result = await getFriends();
-    res.json(result);
-  })
-);
+router.get("/", ctrlWrapper(getFriends));
 
 module.exports = router;

@@ -8,7 +8,7 @@ const petsRouter = require("./routes/api/pets");
 const authRouter = require("./routes/api/auth");
 const friendsRouter = require("./routes/api/friends");
 
-const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
+//const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
 dotenv.config();
 
@@ -35,7 +35,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/auth", authRouter);
 app.use("/api/mypets", petsRouter);
 app.use("/api/friends", friendsRouter);
-
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
