@@ -1,9 +1,9 @@
 const { model, Schema } = require('mongoose');
 
-const { handleSchemaErrors } = require('../middlewares/handleSchemaErrors');
+const handleSchemaErrors = require('../middlewares/handleSchemaErrors');
 
 const noticeSchema = new Schema({
-    title: {
+    tittle: {
         type: String,
         required: [true, 'Title of add is required.']
     },
@@ -11,7 +11,7 @@ const noticeSchema = new Schema({
         type: String,
     },
     dateOfBirth: {
-        type: Date,
+        type: String,
     },
      breed: {
         type: String,
@@ -33,28 +33,21 @@ const noticeSchema = new Schema({
     },
     category: {
         type: String,
-        enum: ['sell', 'lost/found', 'inGoodHands'],
+        enum: ['sell', 'lost-found', 'inGoodHands'],
         required: [true, 'Category is required.']
     },
     petImage: {
         type: String
     },
     owner: {
-        type: Object,
-        ref: 'user',
-        required: true
+       type: Schema.Types.ObjectId,
+       ref: 'users',
     },
-    favorite: {
-            type: Boolean,
-            default: false,
-        },
+
 }, { versionKey: false, timestamps: true });
 
 noticeSchema.post('save', handleSchemaErrors);
 
-const Notice = model("notice", NoticeSchema);
+const Notice = model("notice", noticeSchema);
 
-module.exports = {
-    Notice,
-    noticeSchema,
-};
+module.exports = { Notice, noticeSchema};
