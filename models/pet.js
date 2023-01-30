@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+// const { date } = require("joi");
 
 // створили схему
 const petsSchema = new Schema(
@@ -11,8 +12,8 @@ const petsSchema = new Schema(
       maxlength: [16, "Max length 16 characters"],
     },
     dateOfBirth: {
-      type: String,
-      default: "00.00.0000",
+      type: Date,
+      default: ["dd.mm.yyyy"],
     },
     breed: {
       type: String,
@@ -20,10 +21,10 @@ const petsSchema = new Schema(
       minLength: [2, "Min length 2 characters"],
       maxlength: [16, "Max length 16 characters"],
     },
-    // photoPet: {
-    //   type: String,
-    //   required: true,
-    // },
+    photoPet: {
+      type: String,
+      // required: true,
+    },
     сomments: {
       type: String,
       default: false,
@@ -45,7 +46,7 @@ const petsSchema = new Schema(
 
 const addSchema = Joi.object({
   name: Joi.string().required(),
-  // dateOfBirth: Joi.date().required(),
+  dateOfBirth: Joi.date(),
   breed: Joi.string().required(),
   Comments: Joi.string().required(),
 });
