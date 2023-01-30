@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const handleSchemaErrors = require("../middlewares/handleSchemaErrors");
 
-const friendsSchema = new Schema({
+const sponsorsSchema = new Schema({
   title: {
     type: String,
   },
@@ -29,8 +29,8 @@ const friendsSchema = new Schema({
   },
 });
 
-friendsSchema.post("save", handleSchemaErrors);
+sponsorsSchema.post("save", handleSchemaErrors);
 
-const Friend = model("friend", friendsSchema);
+const Sponsor = model("sponsor", sponsorsSchema);
 
-module.exports = Friend;
+module.exports = Sponsor;
