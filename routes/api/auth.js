@@ -2,7 +2,6 @@ const express = require("express");
 
 const ctrl = require("../../controllers/auth");
 const ctrlWrapper = require("../../helpers/ctrlWrapper");
-
 const upload = require("../../middlewares/uploadFile");
 const {
   registerSchema,
@@ -33,6 +32,7 @@ router.patch(
   authenticate,
   upload.single("avatar"),
   ctrlWrapper(ctrl.updateUserAvatar)
+);
 
 router.get(
   "/google",
@@ -45,7 +45,6 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
   ctrlWrapper(ctrl.google)
-
 );
 
 module.exports = router;
