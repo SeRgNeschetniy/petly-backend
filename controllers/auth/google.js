@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const { User } = require("../../models/users");
+const User = require("../../models/users");
 
 const { SECRET_KEY, BASE_URL, PORT } = process.env;
 
@@ -10,6 +10,8 @@ const google = async (req, res) => {
   const payload = {
     id,
   };
+
+  console.log(id);
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
   await User.findByIdAndUpdate(id, { token });
