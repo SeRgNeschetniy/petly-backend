@@ -8,7 +8,7 @@ const petsRouter = require("./routes/api/pets");
 const authRouter = require("./routes/api/auth");
 const friendsRouter = require("./routes/api/friends");
 
-//const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
+// const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
 dotenv.config();
 
