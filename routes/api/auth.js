@@ -4,6 +4,7 @@ const ctrl = require("../../controllers/auth");
 const ctrlWrapper = require("../../helpers/ctrlWrapper");
 const authenticate = require("../../middlewares/authenticate");
 const { validator } = require("../../middlewares/validationMidlewares");
+const upload = require("../../middlewares/uploadFile");
 const {
   registerSchema,
   loginSchema,
@@ -25,6 +26,13 @@ router.patch(
   authenticate,
   validator(updateUserSchema),
   ctrlWrapper(ctrl.updateUserInfo)
+);
+
+router.patch(
+  "/avatar",
+  authenticate,
+  upload.single("avatar"),
+  ctrlWrapper(ctrl.updateUserAvatar)
 );
 
 module.exports = router;
