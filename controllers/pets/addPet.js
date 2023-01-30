@@ -4,7 +4,7 @@ const { Pets } = require("../../models/pet");
 
 const addPet = async (req, res) => {
   const { _id: owner } = req.user;
-  const {}
+  // const {}
   const addNewPet = await Pets.create({ ...req.body, owner });
   res.status(201).json(addNewPet);
 };
