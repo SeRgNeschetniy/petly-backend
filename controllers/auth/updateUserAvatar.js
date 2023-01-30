@@ -5,6 +5,7 @@ const { nanoid } = require("nanoid");
 
 const User = require("../../models/users");
 const RequestError = require("../../helpers/requestError");
+const { uploadImage } = require("../../middlewares/cloudinary");
 
 const avatarsDir = path.join(__dirname, "../../public", "images", "avatars");
 
@@ -18,7 +19,7 @@ const updateUserAvatar = async (req, res) => {
 
   const resultUpload = path.join(avatarsDir, filename);
   await fs.rename(tempUpload, resultUpload);
-  const avatarURL = path.join("avatars", filename);
+  const avatarURL = await uploadImage(resultUpload);
 
   const result = await User.findOneAndUpdate(_id, { avatarURL });
 
@@ -26,7 +27,7 @@ const updateUserAvatar = async (req, res) => {
     throw RequestError(401, "Not authorized");
   }
 
-  res.json({ avatarURL, message: "File uploaded successfully" });
+  res.json({ avatarURL, message: "success" });
 };
 
 module.exports = updateUserAvatar;
