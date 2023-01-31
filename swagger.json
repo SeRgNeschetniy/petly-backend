@@ -40,9 +40,7 @@
           "tags": ["Auth"],
           "summary": "Create a new user",
           
-          "parameters": [
-            
-          ],
+          "parameters": [],
 
           "requestBody": {
             "description": "Registration's object",
@@ -148,9 +146,28 @@
           }],
           "security": [{ "Bearer": [] }],
 
+          "requestBody": {
+            "description": "Current user object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserInfoRequest"
+                }
+              }
+            }
+          },
+
           "responses": { 
             "200": {
-              "description": "Successful operation"              
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetUserInfoResponse"
+                  }
+                }
+              }              
             },           
             "401": {
               "description": "Not authorized"              
@@ -304,8 +321,7 @@
           "summary": "Obtaining contact information about services that provide services",
 
           "parameters": [],
-          "security": [{ "Bearer": [] }],
-
+          
           "responses": {
             "204": {
               "description": "Logout success"              
@@ -612,7 +628,7 @@
         },
         "LoginRequest": {
           "type": "object",
-          "required": ["email", "password", "name", "city", "phone"],
+          "required": ["email", "password"],
           "properties": {
             "email": {
               "type": "string",
@@ -646,6 +662,72 @@
           "example": [
             { "name": "Boris Johnson", "email": "bjohnson@gmail.com" }
           ]         
+        },
+        "GetUserInfoRequest": {
+          "type": "object",          
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "example": "bjohnson@gmail.com"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "Boris Johnson"                
+            },
+            "city": {
+              "type": "string",
+              "description": "User's city and region",
+              "example": "Brovary, Kyiv"
+            },
+            "phone": {
+              "type": "string",
+              "description": "User's phone",
+              "example": "+380981112233"
+            },
+            "birthday": {
+              "type": "string",
+              "description": "User's birthday"              
+            },
+            "avatarURL": {
+              "type": "string",
+              "description": "avatar URL"
+            }
+          }
+        },
+        "GetUserInfoResponse": {
+          "type": "object",          
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "example": "bjohnson@gmail.com"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "Boris Johnson"                
+            },
+            "city": {
+              "type": "string",
+              "description": "User's city and region",
+              "example": "Brovary, Kyiv"
+            },
+            "phone": {
+              "type": "string",
+              "description": "User's phone",
+              "example": "+380981112233"
+            },
+            "birthday": {
+              "type": "string",
+              "description": "User's birthday"
+            },
+            "avatarURL": {
+              "type": "string",
+              "description": "avatar URL"
+            }
+          }
         }
       },
       "securitySchemes": {
