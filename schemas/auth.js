@@ -21,13 +21,14 @@ const updateUserSchema = Joi.object({
   city: Joi.string().required(),
 });
 
-const restorePassSchema = Joi.object({
+const emailSchema = Joi.object({
   email: Joi.string().required(),
 });
+
 
 module.exports = {
   registerSchema,
   loginSchema,
   updateUserSchema,
-  restorePassSchema,
+  emailSchema,
 };
