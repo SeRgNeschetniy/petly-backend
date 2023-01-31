@@ -1,16 +1,14 @@
+const express = require('express');
+const logger = require('morgan');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const petsRouter = require('./routes/api/pets');
+const friendsRouter = require('./routes/api/friends');
+const noticesRouter = require('./routes/api/notices');
 
-const express = require("express");
-const logger = require("morgan");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
-const petsRouter = require("./routes/api/pets");
-const friendsRouter = require("./routes/api/friends");
-const noticesRouter = require("./routes/api/notices");
-const newsRouter = require('./routes/api/news');
-
-
+// const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
 dotenv.config();
 
@@ -24,24 +22,22 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false })); // add pet from default form(key:value), or true from another form.
 
+// (async () => {
+//   const imagePath =
+//     "https://cloudinary-devs.github.io/cld-docs-assets/assets/images/happy_people.jpg";
 
- (async () => {
-   const imagePath =
-     "https://cloudinary-devs.github.io/cld-docs-assets/assets/images/happy_people.jpg";
-
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use("/api/auth", authRouter);
-app.use("/api/mypets", petsRouter);
-app.use("/api/notice", noticesRouter);
-app.use("/api/friends", friendsRouter);
-
-
+//   const publicId = await uploadImage(imagePath);
+//   const imageTag = await createImageTag(publicId);
+//   console.log(imageTag);
+// })();
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/auth', authRouter);
 app.use('/api/mypets', petsRouter);
+app.use('/api/notice', noticesRouter);
+app.use('/api/friends', friendsRouter);
 app.use('/api/news', newsRouter);
+
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
 });
