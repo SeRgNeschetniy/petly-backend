@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-// const { date } = require("joi");
 
 // створили схему
 const petsSchema = new Schema(
@@ -23,18 +22,13 @@ const petsSchema = new Schema(
     },
     photoPet: {
       type: String,
-      // required: true,
+      // required: [true, "Please, upload your pet's photo"],
     },
-    сomments: {
+    comment: {
       type: String,
-      default: false,
       required: [true, "Your pet need description"],
       minLength: [8, "Min length 8 characters"],
       maxlength: [120, "Max length 120 characters"],
-    },
-    favorite: {
-      type: Boolean,
-      default: false,
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -48,16 +42,11 @@ const addSchema = Joi.object({
   name: Joi.string().required(),
   dateOfBirth: Joi.date(),
   breed: Joi.string().required(),
-  Comments: Joi.string().required(),
-});
-
-const updateFavoriteSchema = Joi.object({
-  favorite: Joi.boolean().required(),
+  сomment: Joi.string().required(),
 });
 
 const schema = {
   addSchema,
-  updateFavoriteSchema,
 };
 
 const Pets = model("pet", petsSchema);
