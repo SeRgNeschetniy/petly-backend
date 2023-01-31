@@ -7,7 +7,7 @@ const {
   registerSchema,
   loginSchema,
   updateUserSchema,
-  restorePassSchema,
+  emailSchema,
 } = require("../../schemas/auth");
 const { validator, authenticate, passport } = require("../../middlewares");
 
@@ -48,10 +48,10 @@ router.get(
   ctrlWrapper(ctrl.google)
 );
 
-router.patch(
-  "/restore",
-  validator(restorePassSchema),
-  ctrlWrapper(ctrl.restorePass)
-);
+router.patch("/restore", validator(emailSchema), ctrlWrapper(ctrl.restorePass));
+
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
+
+router.post("/verify", validator(emailSchema), ctrlWrapper(ctrl.resendVerifyEmail));
 
 module.exports = router;
