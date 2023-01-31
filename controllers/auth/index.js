@@ -5,6 +5,7 @@ const getUserInfo = require("./getUserInfo");
 const updateUserInfo = require("./updateUserInfo");
 const updateUserAvatar = require("./updateUserAvatar");
 const google = require("./google");
+const restorePass = require("./restorePass");
 
 module.exports = {
   register,
@@ -14,4 +15,5 @@ module.exports = {
   updateUserInfo,
   updateUserAvatar,
   google,
+  restorePass,
 };

@@ -7,6 +7,7 @@ const {
   registerSchema,
   loginSchema,
   updateUserSchema,
+  restorePassSchema,
 } = require("../../schemas/auth");
 const { validator, authenticate, passport } = require("../../middlewares");
 
@@ -45,6 +46,12 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
   ctrlWrapper(ctrl.google)
+);
+
+router.patch(
+  "/restore",
+  validator(restorePassSchema),
+  ctrlWrapper(ctrl.restorePass)
 );
 
 module.exports = router;
