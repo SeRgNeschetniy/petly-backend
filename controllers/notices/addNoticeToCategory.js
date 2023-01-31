@@ -21,7 +21,7 @@ const addNoticeToCategory = async (req, res) => {
 
     const imageUpload = await uploadImage(path);
 
-  const newNotice = await Notice.create({ ...req.body, owner, petImage: imageUpload});
+  const newNotice = await Notice.create({ ...req.body, owner});
   
   await User.updateOne({ _id: owner.id }, { $push: { notices: newNotice._id } });
 

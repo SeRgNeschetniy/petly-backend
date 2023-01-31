@@ -34,6 +34,13 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+    },
     token: {
       type: String,
       default: null,
@@ -41,14 +48,14 @@ const userSchema = new Schema(
     notices: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'notice'
-      }
+        ref: "notice",
+      },
     ],
-      favorites: [
+    favorites: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'notice'
-      }
+        ref: "notice",
+      },
     ],
   },
   { versionKey: false, timestamps: true }

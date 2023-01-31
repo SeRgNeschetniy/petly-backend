@@ -14,11 +14,5 @@ router.get('/category/:categoryName', ctrlWrapper(ctrl.getNoticeByCategory));
 router.post('/add', authenticate, validator(addNoticeSchema), upload.single('petImage'), ctrlWrapper(ctrl.addNoticeToCategory));
 
 router.get('/:id', ctrlWrapper(ctrl.findNoticeById));
-// router.post('/favorites/:id', ctrl.addNoticeToFavorites);
-// router.get('/favorites', ctrl.getUserFavorites);
-// router.delete('/favorites/:id', ctrl.deleteNoticeFromFavorites);
-router.get('/', authenticate, ctrlWrapper(ctrl.getUserNotices));
-
-router.delete('/delete/:id', authenticate, ctrlWrapper(ctrl.deleteUserNotice));
 
 module.exports = router;
