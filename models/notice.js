@@ -39,10 +39,10 @@ const noticeSchema = new Schema({
     petImage: {
         type: String,
     },
-    owner: {
-       type: Schema.Types.ObjectId,
-       ref: 'users',
-    },
+     owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    }
 
 }, { versionKey: false, timestamps: true });
 

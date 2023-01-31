@@ -38,6 +38,18 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+    notices: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'notice'
+      }
+    ],
+      favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'notice'
+      }
+    ],
   },
   { versionKey: false, timestamps: true }
 );

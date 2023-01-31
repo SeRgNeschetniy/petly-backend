@@ -17,7 +17,8 @@ router.get('/:id', ctrlWrapper(ctrl.findNoticeById));
 // router.post('/favorites/:id', ctrl.addNoticeToFavorites);
 // router.get('/favorites', ctrl.getUserFavorites);
 // router.delete('/favorites/:id', ctrl.deleteNoticeFromFavorites);
-// router.get('/notices', ctrl.getUserNotices);
-// router.delete('/notices/:id', ctrl.deleteUserNotice);
+router.get('/', authenticate, ctrlWrapper(ctrl.getUserNotices));
+
+router.delete('/delete/:id', authenticate, ctrlWrapper(ctrl.deleteUserNotice));
 
 module.exports = router;
