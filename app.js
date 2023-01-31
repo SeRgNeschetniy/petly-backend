@@ -1,3 +1,4 @@
+
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
@@ -10,6 +11,7 @@ const noticesRouter = require("./routes/api/notices");
 const authRouter = require("./routes/api/auth");
 const userRouter = require("./routes/api/user");
 const newsRouter = require("./routes/api/news");
+
 
 // const { uploadImage, createImageTag } = require("./middlewares/cloudinary");
 
@@ -34,6 +36,7 @@ app.use(express.urlencoded({ extended: false })); // add pet from default form(k
 //   console.log(imageTag);
 // })();
 
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/auth", authRouter);
 app.use("/api/mypets", petsRouter);
@@ -41,6 +44,7 @@ app.use("/api/notice", noticesRouter);
 app.use("/api/friends", friendsRouter);
 app.use("/api/user", userRouter);
 app.use("/api/news", newsRouter);
+
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

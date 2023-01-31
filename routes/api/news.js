@@ -4,6 +4,8 @@ const ctrlWrapper = require("../../helpers/ctrlWrapper");
 
 const router = express.Router();
 
-router.get("/news", ctrlWrapper(getNews));
+
+router.get('/', ctrlWrapper(getNews));
+
 
 module.exports = router;

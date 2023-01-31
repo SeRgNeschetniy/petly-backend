@@ -1,7 +1,9 @@
-const getNews = async (req, res) => {
-  const { _id, title, url, description, date } = req;
+const New = require('../../models/new');
 
-  res.status(200).json({ _id, title, url, description, date });
+const getNews = async (req, res) => {
+  const result = await New.find();
+
+  res.status(200).json(result);
 };
 
 module.exports = getNews;
