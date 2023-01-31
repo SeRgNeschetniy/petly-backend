@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary").v2;
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -20,12 +20,13 @@ const uploadImage = async (imagePath) => {
 
   try {
     const result = await cloudinary.uploader.upload(imagePath, options);
-    console.log(result);
-    return result.public_id;
+    // console.log(result);
+    return result.url;
   } catch (error) {
     console.error(error);
   }
 };
+
 
 const getAssetInfo = async (publicId) => {
   const options = {
