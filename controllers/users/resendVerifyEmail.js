@@ -20,7 +20,7 @@ const resendVerifyEmail = async (req, res) => {
   const verifyEmail = {
     to: email,
     subject: "Please Verify Your Email",
-    html: `<p>Let's verify your email for Patly application. Follow this <a target="_blank" href="${BASE_URL}/api/users/verify/${userVerificationToken}">link</a> .</p>`,
+    html: `<p>Let's verify your email for Patly application. Follow this <a target="_blank" href="${BASE_URL}/api/auth/verify/${userVerificationToken}">link</a> .</p>`,
   };
 
   await sendEmail(verifyEmail);
