@@ -27,7 +27,7 @@ app.use(cookieparser());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/users", usersRouter);
 app.use("/api/mypets", petsRouter);
-app.use("/api/notice", noticesRouter);
+app.use("/api/notices", noticesRouter);
 app.use("/api/friends", friendsRouter);
 app.use("/api/news", newsRouter);
 
