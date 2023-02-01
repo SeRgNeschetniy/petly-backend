@@ -423,7 +423,7 @@
             "type": "string",
             "description": "The token issued to the current user"
           }],
-          
+
           "security": [{ "Bearer": [] }],
 
           "requestBody": {
@@ -480,6 +480,38 @@
           "responses": {
             "201": {
               "description": "Successful operation"
+            }, 
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+
+      "/api/news": {
+        "get": {
+          "tags": ["News"],
+          "summary": "Receiving news",
+
+          "parameters": [],
+
+          "requestBody": {
+            "description": "News object",            
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getNewsRequest"
+                }
+              }
+            }
+          },
+          
+          "responses": {
+            "200": {
+              "description": "Successful operation"
+            },
+            "404": {
+              "description": "Not find"
             }, 
             "500": {
               "description": "Server error"              
@@ -936,6 +968,24 @@
               "type": "string"
             },
             "email": {
+              "type": "string"
+            }
+          }
+        },
+
+        "getNewsRequest": {
+          "type": "object",          
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "date": {
               "type": "string"
             }
           }
