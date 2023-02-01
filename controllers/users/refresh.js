@@ -3,7 +3,7 @@ const { generateTokens } = require("../../helpers/generateTokens");
 const RequestError = require("../../helpers/requestError");
 const User = require("../../models/users");
 
-const { ACCESS_SECRET_KEY, REFRESH_SECRET_KEY } = process.env;
+const { REFRESH_SECRET_KEY } = process.env;
 
 const refresh = async (req, res) => {
   const { refreshToken } = req.cookies;

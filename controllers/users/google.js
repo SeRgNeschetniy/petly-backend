@@ -1,20 +1,19 @@
-const jwt = require("jsonwebtoken");
+const { generateTokens } = require("../../helpers/generateTokens");
 
 const User = require("../../models/users");
 
-const { SECRET_KEY, BASE_URL, PORT } = process.env;
+const { BASE_URL, PORT } = process.env;
 
 const google = async (req, res) => {
-  const { _id: id } = req.user;
+  const { _id } = req.user;
 
-  const payload = {
-    id,
-  };
+  const { token, refreshToken } = await generateTokens(_id);
+  await User.findByIdAndUpdate(_id, { token, refreshToken });
 
-  console.log(id);
-
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
-  await User.findByIdAndUpdate(id, { token });
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+  });
 
   res.redirect(`${BASE_URL}:${PORT}?token=${token}`);
 };

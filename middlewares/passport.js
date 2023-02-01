@@ -10,7 +10,7 @@ const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, BASE_URL, PORT } = process.env;
 const googleParams = {
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: `${BASE_URL}:${PORT}/api/auth/google/callback`,
+  callbackURL: `${BASE_URL}:${PORT}/api/users/google/callback`,
   passReqCallback: true,
 };
 
@@ -24,13 +24,14 @@ const googleCallback = async (
   try {
     const { email, displayName, picture, locate } = profile;
 
-    console.log({ profile });
+    console.log(email);
 
     const user = await User.findOne({ email });
-    console.log(email, displayName);
     if (user) {
       done(null, user);
     }
+
+    console.log(user);
 
     const password = nanoid();
     const hashPassword = await bcrypt.hash(password, 10);
