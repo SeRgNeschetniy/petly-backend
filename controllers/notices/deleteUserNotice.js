@@ -3,7 +3,7 @@ const { Notice } = require('../../models/notice');
 const { RequestError } = require('../../helpers/requestError');
 
 const deleteUserNotice = async (req, res) => {
-    const { id: noticeId } = req.params;
+    const { noticeId } = req.params;
     const { id: userId } = req.user;
 
    await User.findOneAndDelete(noticeId);

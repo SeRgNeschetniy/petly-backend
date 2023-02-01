@@ -74,22 +74,4 @@ router.post(
   ctrlWrapper(ctrlUsers.resendVerifyEmail)
 );
 
-router.post(
-  "/favorites/:id",
-  authenticate,
-  ctrlWrapper(ctrlNotices.addNoticeToFavorites)
-);
-router.get("/favorites", authenticate, ctrlWrapper(ctrlUsers.getUserFavorites));
-router.delete(
-  "/favorites/:id",
-  authenticate,
-  ctrlWrapper(ctrlNotices.deleteNoticeFromFavorites)
-);
-router.get("/notices", authenticate, ctrlWrapper(ctrlNotices.getUserNotices));
-router.delete(
-  "/delete/:id",
-  authenticate,
-  ctrlWrapper(ctrlNotices.deleteUserNotice)
-);
-
 module.exports = router;

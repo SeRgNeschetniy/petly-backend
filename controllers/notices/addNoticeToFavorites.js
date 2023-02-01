@@ -3,7 +3,7 @@ const RequestError = require('../../helpers/requestError');
 
 const addNoticeToFavorites = async (req, res) => {
 
-  const { id: noticeId } = req.params;
+  const { noticeId } = req.params;
   const { id: userId } = req.user;
 
   const user = await User.updateOne({ _id: userId }, { $push: { favorites: noticeId }});
