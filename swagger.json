@@ -525,12 +525,68 @@
           "tags": ["Notices"],
           "summary": "Receiving ads by category",
 
+          "requestBody": {
+            "description": "Notice's object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/noticeSchema"
+                }
+              }
+            }
+          },
+
           "parameters": [],
 
           "responses": { 
             "200": {
               "description": "Successful operation"              
             },           
+            "404": {
+              "description": "Not found"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+
+      "/api/notice/add": {
+        "post": {
+          "tags": ["Notices"],
+          "summary": "Adding ads according to the selected category",
+
+          "requestBody": {
+            "description": "Notice's object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/addNoticeSchema"
+                }
+              }
+            }
+          },
+
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
+
+          "security": [{ "Bearer": [] }],
+         
+          "responses": { 
+            "201": {
+              "description": "Successful operation"              
+            },           
+            "400": {
+              "description": "File is required"              
+            },
             "401": {
               "description": "Not authorized"              
             },
@@ -558,137 +614,18 @@
           }],
           
           "responses": { 
-            "200": {
-              "description": "Successful operation"              
+            "201": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/noticeSchema"
+                  }
+                }
+              }              
             },           
-            "401": {
-              "description": "Not authorized"              
-            },
-            "500": {
-              "description": "Server error"              
-            }
-          }
-        }
-      },
-
-      "/api/notice/favorites/:id": {
-        "post": {
-          "tags": ["Notices"],
-          "summary": "Adding the ad to favorites",
-
-          "parameters": [],
-          
-          "responses": { 
-            "200": {
-              "description": "Successful operation"              
-            },           
-            "401": {
-              "description": "Not authorized"              
-            },
-            "500": {
-              "description": "Server error"              
-            }
-          }
-        }
-      },
-
-      "/api/notice/favorites": {
-        "get": {
-          "tags": ["Notices"],
-          "summary": "Receiving ads of the authorized user added by him to the favorites",
-
-          "parameters": [],
-          
-          "responses": { 
-            "200": {
-              "description": "Successful operation"              
-            },           
-            "401": {
-              "description": "Not authorized"              
-            },
-            "500": {
-              "description": "Server error"              
-            }
-          }
-        }
-      },
-
-      "/api/notice/favorites/{id}": {
-        "delete": {
-          "tags": ["Notices"],
-          "summary": "Deletion of the ad of the authorized user added to the favorites",
-
-          "parameters": [],
-         
-          "responses": { 
-            "200": {
-              "description": "Successful operation"              
-            },           
-            "401": {
-              "description": "Not authorized"              
-            },
-            "500": {
-              "description": "Server error"              
-            }
-          }
-        }
-      },
-
-      "/api/notice/add": {
-        "post": {
-          "tags": ["Notices"],
-          "summary": "Adding ads according to the selected category",
-
-          "parameters": [],
-         
-          "responses": { 
-            "200": {
-              "description": "Successful operation"              
-            },           
-            "401": {
-              "description": "Not authorized"              
-            },
-            "500": {
-              "description": "Server error"              
-            }
-          }
-        }
-      },
-
-      "/api/notice/notices": {
-        "get": {
-          "tags": ["Notices"],
-          "summary": "Receive ads of an authorized user created by the same user",
-
-          "parameters": [],
-         
-          "responses": { 
-            "200": {
-              "description": "Successful operation"              
-            },           
-            "401": {
-              "description": "Not authorized"              
-            },
-            "500": {
-              "description": "Server error"              
-            }
-          }
-        }
-      },
-
-      "/api/notice/notices/:id": {
-        "delete": {
-          "tags": ["Notices"],
-          "summary": "Deleting an ad of an authorized user created by the same user",
-
-          "parameters": [],
-          
-          "responses": { 
-            "200": {
-              "description": "Successful operation"              
-            },           
-            "401": {
-              "description": "Not authorized"              
+            "404": {
+              "description": "Notice not found"              
             },
             "500": {
               "description": "Server error"              
@@ -962,7 +899,7 @@
               "type": "string"
             },
             "workDays": {
-              "type": "[Object]"
+              "type": "object"
             },
             "phone": {
               "type": "string"
@@ -989,8 +926,87 @@
               "type": "string"
             }
           }
+        },
+
+        "noticeSchema": {
+          "type": "object",
+          "required": ["tittle", "sex", "location", "category"],          
+          "properties": {
+            "tittle": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "dateOfBirth": {
+              "type": "string"
+            },
+            "bread": {
+              "type": "string"
+            },
+            "sex": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            },
+            "comments": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string"
+            },
+            "petImage": {
+              "type": "string"
+            },
+            "owner": {
+              "type": "object"
+            }
+          }
+        },
+
+        "addNoticeSchema": {
+          "type": "object",
+          "required": ["tittle", "name", "dateOfBirth", "bread", "sex", "location", "price", "comments", "category", "petImage"],          
+          "properties": {
+            "tittle": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "dateOfBirth": {
+              "type": "string"
+            },
+            "bread": {
+              "type": "string"
+            },
+            "sex": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            },
+            "comments": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string"
+            },
+            "petImage": {
+              "type": "string"
+            }
+          }
         }
       },
+
+      
       
       "securitySchemes": {
         "Bearer": {
