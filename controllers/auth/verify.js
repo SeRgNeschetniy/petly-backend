@@ -1,5 +1,6 @@
 const User = require("../../models/users");
 const RequestError = require("../../helpers/requestError");
+const { CLIENT_URL } = process.env;
 
 const verify = async (req, res) => {
   const { verificationToken } = req.params;
@@ -14,7 +15,7 @@ const verify = async (req, res) => {
     verificationToken: null,
   });
 
-  res.json({ message: "Verification successful" });
+  res.redirect(CLIENT_URL);
 };
 
 module.exports = verify;
