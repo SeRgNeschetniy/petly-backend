@@ -1,15 +1,19 @@
 const express = require("express");
 
-const ctrl = require("../../controllers/auth");
+const ctrl = require("../../controllers/notices");
 const ctrlWrapper = require("../../helpers/ctrlWrapper");
-const upload = require("../../middlewares/uploadFile");
 const {
   registerSchema,
   loginSchema,
   updateUserSchema,
   emailSchema,
 } = require("../../schemas/auth");
-const { validator, authenticate, passport } = require("../../middlewares");
+const {
+  validator,
+  authenticate,
+  passport,
+  upload,
+} = require("../../middlewares");
 
 const router = express.Router();
 
@@ -52,6 +56,24 @@ router.patch("/restore", validator(emailSchema), ctrlWrapper(ctrl.restorePass));
 
 router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
 
-router.post("/verify", validator(emailSchema), ctrlWrapper(ctrl.resendVerifyEmail));
+router.post(
+  "/verify",
+  validator(emailSchema),
+  ctrlWrapper(ctrl.resendVerifyEmail)
+);
+
+router.post(
+  "/favorites/:id",
+  authenticate,
+  ctrlWrapper(ctrl.addNoticeToFavorites)
+);
+router.get("/favorites", authenticate, ctrlWrapper(ctrl.getUserFavorites));
+router.delete(
+  "/favorites/:id",
+  authenticate,
+  ctrlWrapper(ctrl.deleteNoticeFromFavorites)
+);
+router.get("/notices", authenticate, ctrlWrapper(ctrl.getUserNotices));
+router.delete("/delete/:id", authenticate, ctrlWrapper(ctrl.deleteUserNotice));
 
 module.exports = router;

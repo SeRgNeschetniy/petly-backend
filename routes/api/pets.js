@@ -7,9 +7,7 @@ const upload = require("../../middlewares/uploadFile");
 const router = express.Router();
 
 router.get("/", authenticate, ctrlWrapper(getUserPets));
-
 router.post("/", authenticate, upload.single("photoPet"), ctrlWrapper(addPet));
-
 router.delete("/:petId", authenticate, ctrlWrapper(removePet));
 
 module.exports = router;

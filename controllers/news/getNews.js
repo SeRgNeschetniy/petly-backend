@@ -1,4 +1,4 @@
-const New = require('../../models/new');
+const New = require("../../models/news");
 
 const getNews = async (req, res) => {
   const result = await New.find();
