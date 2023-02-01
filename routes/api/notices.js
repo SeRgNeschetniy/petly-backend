@@ -9,10 +9,28 @@ const addNoticeSchema = require('../../schemas/notice');
 
 const router = express.Router();
 
-router.get('/category/:categoryName', ctrlWrapper(ctrl.getNoticeByCategory));
+router.get('/:categoryName', ctrlWrapper(ctrl.getNoticeByCategory));
 
 router.post('/add', authenticate, validator(addNoticeSchema), upload.single('petImage'), ctrlWrapper(ctrl.addNoticeToCategory));
 
 router.get('/:id', ctrlWrapper(ctrl.findNoticeById));
+
+router.post(
+  "/:noticeId/favorites",
+  authenticate,
+  ctrlWrapper(ctrl.addNoticeToFavorites)
+);
+router.get("/favorites", authenticate, ctrlWrapper(ctrl.getUserFavorites));
+router.delete(
+  "/:noticeId/favorites",
+  authenticate,
+  ctrlWrapper(ctrl.deleteNoticeFromFavorites)
+);
+router.get("/own", authenticate, ctrlWrapper(ctrl.getUserNotices));
+router.delete(
+  "/:noticeId",
+  authenticate,
+  ctrlWrapper(ctrl.deleteUserNotice)
+);
 
 module.exports = router;

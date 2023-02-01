@@ -2,7 +2,7 @@ const User = require('../../models/users');
 const { RequestError } = require('../../helpers/requestError');
 
 const deleteNoticeFromFavorites = async (req, res) => {
-    const { id: noticeId } = req.params;
+    const { noticeId } = req.params;
     const { id: userId } = req.user;
 
     const user = await User.updateOne({ _id: userId }, { $pull: { favorites: noticeId } });
