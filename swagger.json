@@ -35,7 +35,7 @@
       }
     ],
     "paths": {
-      "/api/auth/register": {
+      "/api/users/register": {
         "post": {
           "tags": ["Auth"],
           "summary": "Create a new user",
@@ -74,7 +74,7 @@
         }
       },
 
-      "/api/auth/login": {
+      "/api/users/login": {
         "post": {
           "tags": ["Auth"],
           "summary": "User login",
@@ -115,7 +115,7 @@
         }
       },
 
-      "/api/auth/logout": {
+      "/api/users/logout": {
         "post": {
           "tags": ["Auth"],
           "summary": "Log out user",
@@ -143,7 +143,7 @@
         }
       },
 
-      "/api/auth/current": {
+      "/api/users/current": {
         "get": {
           "tags": ["Auth"],
           "summary": "Get information about the current user",
@@ -178,7 +178,7 @@
         }
       }, 
 
-      "/api/auth/update": {
+      "/api/users/update": {
         "patch": {
           "tags": ["Auth"],
           "summary": "Update information about the current user",
@@ -213,7 +213,7 @@
         }
       },
 
-      "/api/auth/avatar": {
+      "/api/users/avatar": {
         "patch": {
           "tags": ["Auth"],
           "summary": "Update user avatar",
@@ -248,76 +248,7 @@
         }
       },
 
-      "/api/auth/google": {
-        "get": {
-          "tags": ["Auth"],
-          "summary": "Authorization of a new user through Google",
-          
-          "parameters": [
-            {
-              "in": "header",
-              "name": "authorization",
-              "required": "true",
-              "type": "string",
-              "description": "The token issued to the current user"
-            }
-          ],
-          "security": [{ "Bearer": [] }],
-
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string",
-                  "email": "User's email"                  
-                },                
-                "example": {
-                  "email": {
-                    "type": "string",
-                    "description": "User's email",
-                    "example": "bjohnson@gmail.com"            
-                  }
-                }
-              }
-            }
-          },
-
-          "responses": {
-            "200": {
-              "description": "Successful operation"              
-            },
-            "404": {
-              "description": "User not found"              
-            },            
-            "500": { "description": "Server error"              
-            }
-          }
-        }
-      },
-
-      "/api/auth/google/callback": {
-        "get": {
-          "tags": ["Auth"],
-          "summary": "Authorization of a new user through Google",
-          
-          
-          "parameters": [],
-          "security": [{ "Bearer": [] }],
-
-          "responses": {
-            "201": {
-              "description": "Successful operation"
-            },
-            "401": {
-              "description": "Not authorized"              
-            },
-            "500": { "description": "Server error"              
-            }
-          }
-        }
-      },
-      "/api/auth/restore": {
+      "/api/users/restore": {
         "patch": {
           "tags": ["Auth"],
           "summary": "Restore user password",
@@ -365,7 +296,7 @@
         }
       },
 
-      "/api/auth/verify/:verificationToken": {
+      "/api/users/verify/:verificationToken": {
         "get": {
           "tags": ["Auth"],
           "summary": "Update user token",
@@ -411,7 +342,7 @@
         }
       },
 
-      "/api/auth/verify": {
+      "/api/users/verify": {
         "post": {
           "tags": ["Auth"],
           "summary": "Verify user Email",
@@ -636,7 +567,7 @@
 
       "/api/mypets": {
         "get": {
-          "tags": ["User"],
+          "tags": ["Auth"],
           "summary": "Receiving personal information about the user and information about the user's animals",
 
           "parameters": [{
@@ -661,7 +592,7 @@
           }
         },
         "post": {
-          "tags": ["User"],
+          "tags": ["Auth"],
           "summary": "Adding a user animal card",
 
           "parameters": [{
@@ -672,10 +603,28 @@
             "description": "The token issued to the current user"
           }],
           "security": [{ "Bearer": [] }],
+          "requestBody": {
+            "description": "Pets object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/petsSchema"
+                }
+              }
+            }
+          },
 
           "responses": { 
             "201": {
-              "description": "Successful operation"              
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/petsSchema"
+                  }
+                }
+              }              
             },           
             "401": {
               "description": "Not authorized"              
@@ -689,12 +638,18 @@
 
       
 
-      "/api/mypets/{petId}": {
+      "/api/mypets/:petId": {
         "delete": {
-          "tags": ["User"],
+          "tags": ["Auth"],
           "summary": "Removing the card with the user's animal",
 
-          "parameters": [],
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
           "security": [{ "Bearer": [] }],
 
           "responses": { 
@@ -1001,6 +956,32 @@
             },
             "petImage": {
               "type": "string"
+            }
+          }
+        },
+
+        "petsSchema": {
+          "type": "object",
+          "required": ["name", "bread", "comments"],          
+          "properties": {
+            
+            "name": {
+              "type": "string"
+            },
+            "dateOfBirth": {
+              "type": "string"
+            },
+            "bread": {
+              "type": "string"
+            },
+            "photoPet": {
+              "type": "string"
+            },
+            "comments": {
+              "type": "string"
+            },                        
+            "owner": {
+              "type": "object"
             }
           }
         }
