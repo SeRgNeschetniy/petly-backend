@@ -8,6 +8,7 @@ const google = require("./google");
 const restorePass = require("./restorePass");
 const verify = require("./verify");
 const resendVerifyEmail = require("./resendVerifyEmail");
+const refresh = require("./refresh");
 
 module.exports = {
   register,
@@ -20,4 +21,5 @@ module.exports = {
   restorePass,
   verify,
   resendVerifyEmail,
+  refresh,
 };

@@ -1,6 +1,8 @@
 const express = require("express");
 
-const ctrl = require("../../controllers/notices");
+const ctrlUsers = require("../../controllers/users");
+const ctrlNotices = require("../../controllers/notices");
+
 const ctrlWrapper = require("../../helpers/ctrlWrapper");
 const {
   registerSchema,
@@ -17,26 +19,32 @@ const {
 
 const router = express.Router();
 
-router.post("/register", validator(registerSchema), ctrlWrapper(ctrl.register));
+router.post(
+  "/register",
+  validator(registerSchema),
+  ctrlWrapper(ctrlUsers.register)
+);
 
-router.post("/login", validator(loginSchema), ctrlWrapper(ctrl.login));
+router.post("/login", validator(loginSchema), ctrlWrapper(ctrlUsers.login));
 
-router.post("/logout", authenticate, ctrlWrapper(ctrl.logout));
+router.post("/logout", authenticate, ctrlWrapper(ctrlUsers.logout));
 
-router.get("/current", authenticate, ctrlWrapper(ctrl.getUserInfo));
+router.get("/current", authenticate, ctrlWrapper(ctrlUsers.getUserInfo));
+
+router.post("/refresh", authenticate, ctrlWrapper(ctrlUsers.refresh));
 
 router.patch(
   "/update",
   authenticate,
   validator(updateUserSchema),
-  ctrlWrapper(ctrl.updateUserInfo)
+  ctrlWrapper(ctrlUsers.updateUserInfo)
 );
 
 router.patch(
   "/avatar",
   authenticate,
   upload.single("avatar"),
-  ctrlWrapper(ctrl.updateUserAvatar)
+  ctrlWrapper(ctrlUsers.updateUserAvatar)
 );
 
 router.get(
@@ -49,31 +57,39 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
-  ctrlWrapper(ctrl.google)
+  ctrlWrapper(ctrlUsers.google)
 );
 
-router.patch("/restore", validator(emailSchema), ctrlWrapper(ctrl.restorePass));
+router.patch(
+  "/restore",
+  validator(emailSchema),
+  ctrlWrapper(ctrlUsers.restorePass)
+);
 
-router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
+router.get("/verify/:verificationToken", ctrlWrapper(ctrlUsers.verify));
 
 router.post(
   "/verify",
   validator(emailSchema),
-  ctrlWrapper(ctrl.resendVerifyEmail)
+  ctrlWrapper(ctrlUsers.resendVerifyEmail)
 );
 
 router.post(
   "/favorites/:id",
   authenticate,
-  ctrlWrapper(ctrl.addNoticeToFavorites)
+  ctrlWrapper(ctrlNotices.addNoticeToFavorites)
 );
-router.get("/favorites", authenticate, ctrlWrapper(ctrl.getUserFavorites));
+router.get("/favorites", authenticate, ctrlWrapper(ctrlUsers.getUserFavorites));
 router.delete(
   "/favorites/:id",
   authenticate,
-  ctrlWrapper(ctrl.deleteNoticeFromFavorites)
+  ctrlWrapper(ctrlNotices.deleteNoticeFromFavorites)
 );
-router.get("/notices", authenticate, ctrlWrapper(ctrl.getUserNotices));
-router.delete("/delete/:id", authenticate, ctrlWrapper(ctrl.deleteUserNotice));
+router.get("/notices", authenticate, ctrlWrapper(ctrlNotices.getUserNotices));
+router.delete(
+  "/delete/:id",
+  authenticate,
+  ctrlWrapper(ctrlNotices.deleteUserNotice)
+);
 
 module.exports = router;

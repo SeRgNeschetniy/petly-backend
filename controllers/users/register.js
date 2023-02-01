@@ -5,6 +5,7 @@ const { nanoid } = require("nanoid");
 const User = require("../../models/users");
 const RequestError = require("../../helpers/requestError");
 const sendEmail = require("../../helpers/sendEmail");
+const { generateTokens } = require("../../helpers/generateTokens");
 const { BASE_URL } = process.env;
 
 const register = async (req, res) => {
@@ -26,6 +27,19 @@ const register = async (req, res) => {
     verificationToken,
   });
 
+  console.log(newUser._id);
+
+  const { token, refreshToken } = generateTokens(newUser._id);
+
+  await User.findByIdAndUpdate(newUser._id, { token, refreshToken });
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+  });
+
   const verifyEmail = {
     to: email,
     subject: "Please Verify Your Email Patly",
@@ -35,6 +49,8 @@ const register = async (req, res) => {
   await sendEmail(verifyEmail);
 
   res.status(201).json({
+    token,
+    refreshToken,
     user: {
       name: newUser.name,
       email: newUser.email,

@@ -45,6 +45,10 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+    refreshToken: {
+      type: String,
+      default: null,
+    },
     notices: [
       {
         type: Schema.Types.ObjectId,

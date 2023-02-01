@@ -9,6 +9,7 @@ const friendsRouter = require("./routes/api/friends");
 const noticesRouter = require("./routes/api/notices");
 const usersRouter = require("./routes/api/users");
 const newsRouter = require("./routes/api/news");
+const cookieparser = require("cookie-parser");
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieparser());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/users", usersRouter);
