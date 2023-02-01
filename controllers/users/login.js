@@ -18,8 +18,6 @@ const login = async (req, res) => {
     throw RequestError(401, "Email or password is wrong");
   }
 
-  //дописать проверку
-
   const { token, refreshToken } = await generateTokens(user._id);
 
   await User.findByIdAndUpdate(user._id, { token, refreshToken });

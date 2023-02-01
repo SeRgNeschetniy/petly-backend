@@ -31,7 +31,7 @@ router.post("/logout", authenticate, ctrlWrapper(ctrlUsers.logout));
 
 router.get("/current", authenticate, ctrlWrapper(ctrlUsers.getUserInfo));
 
-router.post("/refresh", authenticate, ctrlWrapper(ctrlUsers.refresh));
+router.get("/refresh", ctrlWrapper(ctrlUsers.refresh));
 
 router.patch(
   "/update",
