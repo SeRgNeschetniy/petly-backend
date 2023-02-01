@@ -73,6 +73,7 @@
           }
         }
       },
+
       "/api/auth/login": {
         "post": {
           "tags": ["Auth"],
@@ -107,16 +108,25 @@
             },
             "401": {
               "description": "Email or password is wrong"              
+            },
+            "500": { "description": "Server error"              
             }
           }
         }
       },
+
       "/api/auth/logout": {
         "post": {
           "tags": ["Auth"],
           "summary": "Log out user",
 
-          "parameters": [],
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
           "security": [{ "Bearer": [] }],
 
           "responses": {
@@ -132,31 +142,20 @@
           }
         }
       },
+
       "/api/auth/current": {
         "get": {
           "tags": ["Auth"],
           "summary": "Get information about the current user",
 
           "parameters": [{
-            "in": "path",
-            "name": "_id",
+            "in": "header",
+            "name": "authorization",
             "required": "true",
             "type": "string",
-            "description": "User's id"
+            "description": "The token issued to the current user"
           }],
           "security": [{ "Bearer": [] }],
-
-          "requestBody": {
-            "description": "Current user object",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUserInfoRequest"
-                }
-              }
-            }
-          },
 
           "responses": { 
             "200": {
@@ -177,18 +176,32 @@
             }
           }
         }
-      },  
+      }, 
+
       "/api/auth/update": {
         "patch": {
           "tags": ["Auth"],
           "summary": "Update information about the current user",
 
-          "parameters": [],
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
           "security": [{ "Bearer": [] }],
 
           "responses": { 
             "200": {
-              "description": "Successful operation"              
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetUserInfoResponse"
+                  }
+                }
+              }                
             },           
             "401": {
               "description": "Not authorized"              
@@ -199,17 +212,31 @@
           }
         }
       },
+
       "/api/auth/avatar": {
         "patch": {
           "tags": ["Auth"],
           "summary": "Update user avatar",
 
-          "parameters": [],
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
           "security": [{ "Bearer": [] }],
 
           "responses": { 
             "200": {
-              "description": "Successful operation"              
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "example": [
+                    { "avatarURL": "string" }
+                  ]
+                }
+              }             
             },           
             "401": {
               "description": "Not authorized"              
@@ -220,6 +247,7 @@
           }
         }
       },
+
       "/api/auth/google": {
         "get": {
           "tags": ["Auth"],
@@ -227,90 +255,206 @@
           
           "parameters": [
             {
-              "in": "path",
-              "name": "userId",
+              "in": "header",
+              "name": "authorization",
               "required": "true",
               "type": "string",
-              "description": "User's id"
+              "description": "The token issued to the current user"
             }
           ],
           "security": [{ "Bearer": [] }],
 
           "requestBody": {
-            "description": "Registration's object",
             "required": true,
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationRequest"
+                  "type": "string",
+                  "email": "User's email"                  
+                },                
+                "example": {
+                  "email": {
+                    "type": "string",
+                    "description": "User's email",
+                    "example": "bjohnson@gmail.com"            
+                  }
                 }
               }
             }
           },
+
+          "responses": {
+            "200": {
+              "description": "Successful operation"              
+            },
+            "404": {
+              "description": "User not found"              
+            },            
+            "500": { "description": "Server error"              
+            }
+          }
+        }
+      },
+
+      "/api/auth/google/callback": {
+        "get": {
+          "tags": ["Auth"],
+          "summary": "Authorization of a new user through Google",
+          
+          
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+
           "responses": {
             "201": {
-              "description": "Successful operation",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/RegistrationResponse"
-                  }
-                }
-              }
+              "description": "Successful operation"
             },
-            "400": { "description": "Bad Request"              
-            },
-            "409": { "description": "Email in use"              
+            "401": {
+              "description": "Not authorized"              
             },
             "500": { "description": "Server error"              
             }
           }
         }
       },
-      "/api/auth/google/callback": {
+      "/api/auth/restore": {
+        "patch": {
+          "tags": ["Auth"],
+          "summary": "Restore user password",
+
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "email": "User's email"                  
+                },                
+                "example": {
+                  "email": {
+                    "type": "string",
+                    "description": "User's email",
+                    "example": "bjohnson@gmail.com"            
+                  }
+                }
+              }
+            }
+          },
+
+          "parameters": [],
+
+          "security": [{ "Bearer": [] }],
+
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "example": 
+                    { "message": "New password email sent" }                  
+                }
+              }                
+            },            
+            "404": {
+              "description": "Email is not found"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+
+      "/api/auth/verify/:verificationToken": {
         "get": {
           "tags": ["Auth"],
-          "summary": "Authorization of a new user through Google",
+          "summary": "Update user token",
           
           "parameters": [
             {
-              "in": "path",
-              "name": "userId",
+              "in": "header",
+              "name": "authorization",
               "required": "true",
               "type": "string",
-              "description": "User's id"
+              "description": "The token issued to the current user"
             }
           ],
           "security": [{ "Bearer": [] }],
 
           "requestBody": {
-            "description": "Registration's object",
             "required": true,
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationRequest"
+                  "type": "string"                  
+                },                
+                "example": {
+                  "verificationToken": {
+                    "type": "string",
+                    "description": "User's verificationToken" 
+                  }
                 }
               }
             }
           },
+
           "responses": {
-            "201": {
-              "description": "Successful operation",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/RegistrationResponse"
+            "200": {
+              "description": "Verification successful"              
+            },
+            "401": {
+              "description": "Not authorized"              
+            },            
+            "500": { "description": "Server error"              
+            }
+          }
+        }
+      },
+
+      "/api/auth/verify": {
+        "post": {
+          "tags": ["Auth"],
+          "summary": "Verify user Email",
+          
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
+          
+          "security": [{ "Bearer": [] }],
+
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "email": "User's email"                 
+                },                
+                "example": {
+                  "email": {
+                    "type": "string",
+                    "description": "User's email",
+                    "example": "bjohnson@gmail.com"            
                   }
                 }
               }
-            },
-            "400": { "description": "Bad Request"              
-            },
-            "409": { "description": "Email in use"              
-            },
-            "500": { "description": "Server error"              
             }
+          },
+
+          "responses": {
+            "200": {
+              "description": "Verification email sent"              
+            },
+            "400": { "description": "Verification has already been passed"              
+            },
+            "404": {
+              "description": "User is not found"              
+            }            
+            
           }
         }
       },
@@ -321,27 +465,35 @@
           "summary": "Obtaining contact information about services that provide services",
 
           "parameters": [],
+
+          "requestBody": {
+            "description": "Sponsors object",            
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getFriendsRequest"
+                }
+              }
+            }
+          },
           
           "responses": {
-            "204": {
-              "description": "Logout success"              
-            },            
-            "401": {
-              "description": "Missing header with authorization token"              
-            },
+            "201": {
+              "description": "Successful operation"
+            }, 
             "500": {
               "description": "Server error"              
             }
           }
         }
       },
+
       "/api/notice/category/:categoryName": {
         "get": {
           "tags": ["Notices"],
           "summary": "Receiving ads by category",
 
           "parameters": [],
-          "security": [{ "Bearer": [] }],
 
           "responses": { 
             "200": {
@@ -356,14 +508,23 @@
           }
         }
       },
+
       "/api/notice/:id": {
         "get": {
           "tags": ["Notices"],
           "summary": "Receiving one ad",
 
-          "parameters": [],
-          "security": [{ "Bearer": [] }],
-
+          "parameters": [{
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "User's id",
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }],
+          
           "responses": { 
             "200": {
               "description": "Successful operation"              
@@ -377,14 +538,14 @@
           }
         }
       },
+
       "/api/notice/favorites/:id": {
         "post": {
           "tags": ["Notices"],
           "summary": "Adding the ad to favorites",
 
           "parameters": [],
-          "security": [{ "Bearer": [] }],
-
+          
           "responses": { 
             "200": {
               "description": "Successful operation"              
@@ -398,14 +559,14 @@
           }
         }
       },
+
       "/api/notice/favorites": {
         "get": {
           "tags": ["Notices"],
           "summary": "Receiving ads of the authorized user added by him to the favorites",
 
           "parameters": [],
-          "security": [{ "Bearer": [] }],
-
+          
           "responses": { 
             "200": {
               "description": "Successful operation"              
@@ -419,14 +580,14 @@
           }
         }
       },
+
       "/api/notice/favorites/{id}": {
         "delete": {
           "tags": ["Notices"],
           "summary": "Deletion of the ad of the authorized user added to the favorites",
 
           "parameters": [],
-          "security": [{ "Bearer": [] }],
-
+         
           "responses": { 
             "200": {
               "description": "Successful operation"              
@@ -440,14 +601,14 @@
           }
         }
       },
+
       "/api/notice/add": {
         "post": {
           "tags": ["Notices"],
           "summary": "Adding ads according to the selected category",
 
           "parameters": [],
-          "security": [{ "Bearer": [] }],
-
+         
           "responses": { 
             "200": {
               "description": "Successful operation"              
@@ -461,14 +622,14 @@
           }
         }
       },
+
       "/api/notice/notices": {
         "get": {
           "tags": ["Notices"],
           "summary": "Receive ads of an authorized user created by the same user",
 
           "parameters": [],
-          "security": [{ "Bearer": [] }],
-
+         
           "responses": { 
             "200": {
               "description": "Successful operation"              
@@ -482,14 +643,14 @@
           }
         }
       },
+
       "/api/notice/notices/:id": {
         "delete": {
           "tags": ["Notices"],
           "summary": "Deleting an ad of an authorized user created by the same user",
 
           "parameters": [],
-          "security": [{ "Bearer": [] }],
-
+          
           "responses": { 
             "200": {
               "description": "Successful operation"              
@@ -503,12 +664,19 @@
           }
         }
       },
+
       "/api/mypets": {
         "get": {
           "tags": ["User"],
           "summary": "Receiving personal information about the user and information about the user's animals",
 
-          "parameters": [],
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
           "security": [{ "Bearer": [] }],
 
           "responses": { 
@@ -522,18 +690,22 @@
               "description": "Server error"              
             }
           }
-        }
-      },
-      "/api/mypets/petId": {
+        },
         "post": {
           "tags": ["User"],
           "summary": "Adding a user animal card",
 
-          "parameters": [],
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
           "security": [{ "Bearer": [] }],
 
           "responses": { 
-            "200": {
+            "201": {
               "description": "Successful operation"              
             },           
             "401": {
@@ -545,6 +717,9 @@
           }
         }
       },
+
+      
+
       "/api/mypets/{petId}": {
         "delete": {
           "tags": ["User"],
@@ -567,6 +742,7 @@
         }
       }
     },
+
     "components": {
       "schemas": {
         "RegistrationRequest": {
@@ -601,6 +777,7 @@
             }
           }
         },
+
         "RegistrationResponse": {
           "type": "array",
           "items": {
@@ -626,6 +803,7 @@
             { "name": "Boris Johnson", "email": "bjohnson@gmail.com", "avatarURL": "string" }
           ]
         },
+
         "LoginRequest": {
           "type": "object",
           "required": ["email", "password"],
@@ -642,6 +820,7 @@
             }
           }
         },
+
         "LoginResponse": {
           "type": "array",
           "items": {
@@ -663,6 +842,7 @@
             { "name": "Boris Johnson", "email": "bjohnson@gmail.com" }
           ]         
         },
+
         "GetUserInfoRequest": {
           "type": "object",          
           "properties": {
@@ -696,6 +876,7 @@
             }
           }
         },
+
         "GetUserInfoResponse": {
           "type": "object",          
           "properties": {
@@ -728,8 +909,39 @@
               "description": "avatar URL"
             }
           }
+        },
+
+        "getFriendsRequest": {
+          "type": "object",          
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "addressUrl": {
+              "type": "string"
+            },
+            "imageUrl": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "workDays": {
+              "type": "[Object]"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          }
         }
       },
+      
       "securitySchemes": {
         "Bearer": {
           "type": "http",
