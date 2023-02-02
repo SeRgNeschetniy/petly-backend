@@ -7,7 +7,7 @@ const swaggerDocument = require("./swagger.json");
 const petsRouter = require("./routes/api/pets");
 const friendsRouter = require("./routes/api/friends");
 const noticesRouter = require("./routes/api/notices");
-const usersRouter = require("./routes/api/users");
+const usersRouter = require("./routes/api/auth");
 const newsRouter = require("./routes/api/news");
 const cookieparser = require("cookie-parser");
 
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieparser());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use("/api/users", usersRouter);
+app.use("/api/auth", usersRouter);
 app.use("/api/mypets", petsRouter);
 app.use("/api/notices", noticesRouter);
 app.use("/api/friends", friendsRouter);

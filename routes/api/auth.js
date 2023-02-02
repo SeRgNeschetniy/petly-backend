@@ -1,6 +1,6 @@
 const express = require("express");
 
-const ctrlUsers = require("../../controllers/users");
+const ctrlUsers = require("../../controllers/auth");
 const ctrlNotices = require("../../controllers/notices");
 
 const ctrlWrapper = require("../../helpers/ctrlWrapper");
