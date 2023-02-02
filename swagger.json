@@ -451,7 +451,7 @@
         }
       },
 
-      "/api/notice/category/:categoryName": {
+      "/api/notices/:categoryName": {
         "get": {
           "tags": ["Notices"],
           "summary": "Receiving ads by category",
@@ -484,7 +484,7 @@
         }
       },
 
-      "/api/notice/add": {
+      "/api/notices": {
         "post": {
           "tags": ["Notices"],
           "summary": "Adding ads according to the selected category",
@@ -528,7 +528,7 @@
         }
       },
 
-      "/api/notice/:id": {
+      "/api/notices/:id": {
         "get": {
           "tags": ["Notices"],
           "summary": "Receiving one ad",
@@ -565,9 +565,156 @@
         }
       },
 
+      "/api/notices/favorites": {
+        "get": {
+          "tags": ["Notices"],
+          "summary": "Receiving ads of the authorized user added by him to the favorites",
+
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+
+      "/api/notices/:noticeId/favorites": {
+        "post": {
+          "tags": ["Notices"],
+          "summary": "Adding an authorized user's ad to favorites",
+
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Notice was added to favorites"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        },
+       
+        "delete": {
+          "tags": ["Notices"],
+          "summary": "Deletion of the ad of the authorized user added to the favorites",
+
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Notice was deleted from Favorite"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "404": {
+              "description": "Notice not found"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }        
+      },
+
+      "/api/notices/own": {
+        "get": {
+          "tags": ["Notices"],
+          "summary": "Receiving ads of an authorized user created by the same user",
+
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Successful operation"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "404": {
+              "description": "Not found"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }
+      },
+
+      "/api/notices/:noticeId": {
+        "delete": {
+          "tags": ["Notices"],
+          "summary": "Deleting an ad of an authorized user",
+
+          "parameters": [{
+            "in": "header",
+            "name": "authorization",
+            "required": "true",
+            "type": "string",
+            "description": "The token issued to the current user"
+          }],
+          "security": [{ "Bearer": [] }],
+
+          "responses": { 
+            "200": {
+              "description": "Notice was deleted"              
+            },           
+            "401": {
+              "description": "Not authorized"              
+            },
+            "404": {
+              "description": "Notice not found"              
+            },
+            "500": {
+              "description": "Server error"              
+            }
+          }
+        }   
+      },
+
       "/api/mypets": {
         "get": {
-          "tags": ["Auth"],
+          "tags": ["User"],
           "summary": "Receiving personal information about the user and information about the user's animals",
 
           "parameters": [{
@@ -592,7 +739,7 @@
           }
         },
         "post": {
-          "tags": ["Auth"],
+          "tags": ["User"],
           "summary": "Adding a user animal card",
 
           "parameters": [{
@@ -640,7 +787,7 @@
 
       "/api/mypets/:petId": {
         "delete": {
-          "tags": ["Auth"],
+          "tags": ["User"],
           "summary": "Removing the card with the user's animal",
 
           "parameters": [{
