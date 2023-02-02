@@ -12,8 +12,11 @@
   "consumes": ["application/json", "multipart/form-data"],
   "produces": ["application/json", "multipart/form-data"],
   "servers": [
-    { "url": "http://localhost:4000" },
-    { "url": "https://petly-backend-vopf.onrender.com" }
+    { "url": "http://localhost:4000", "description": "Local" },
+    {
+      "url": "https://petly-backend-vopf.onrender.com",
+      "description": "Main"
+    }
   ],
   "tags": [
     {
@@ -400,20 +403,16 @@
 
         "parameters": [],
 
-        "requestBody": {
-          "description": "Sponsors object",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/getFriendsRequest"
-              }
-            }
-          }
-        },
-
         "responses": {
           "200": {
-            "description": "Successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getFriendsRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error"
@@ -429,20 +428,16 @@
 
         "parameters": [],
 
-        "requestBody": {
-          "description": "News object",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/getNewsRequest"
-              }
-            }
-          }
-        },
-
         "responses": {
           "200": {
-            "description": "Successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getNewsRequest"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not find"
