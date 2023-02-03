@@ -9,8 +9,8 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "consumes": ["application/json", "multipart/form-data"],
-  "produces": ["application/json", "multipart/form-data"],
+  "consumes": ["application/json", "multipart/form-data", "image/png"],
+  "produces": ["application/json", "multipart/form-data", "image/png"],
   "servers": [
     { "url": "http://localhost:4000", "description": "Local" },
     {
@@ -225,7 +225,7 @@
           "description": "User avatar object",
           "required": true,
           "content": {
-            "multipart/form-data": {}
+            "image/png": {}
           }
         },
        

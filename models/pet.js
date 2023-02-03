@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
-// створили схему
 const petsSchema = new Schema(
   {
     name: {
@@ -22,7 +21,9 @@ const petsSchema = new Schema(
     },
     photoPet: {
       type: String,
+      required: [true, "Please, upload your pet's photo"],
     },
+
     comment: {
       type: String,
       required: [true, "Your pet need description"],
