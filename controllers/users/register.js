@@ -4,9 +4,9 @@ const { nanoid } = require("nanoid");
 
 const User = require("../../models/user");
 const RequestError = require("../../helpers/requestError");
-const sendEmail = require("../../helpers/sendEmail");
+const transporter = require("../../helpers/sendEmail");
 const { generateTokens } = require("../../helpers/generateTokens");
-const { BASE_URL } = process.env;
+const { BASE_URL, FROM_EMAIL } = process.env;
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -41,12 +41,13 @@ const register = async (req, res) => {
   });
 
   const verifyEmail = {
+    from: FROM_EMAIL,
     to: email,
     subject: "Please Verify Your Email Patly",
-    html: `<p>Let's verify your email for Patly application. Follow this <a target="_blank" href="${BASE_URL}/api/auth/verify/${verificationToken}">link</a> .</p>`,
+    html: `<p>Let's verify your email for Patly application. Follow this <a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">link</a> .</p>`,
   };
 
-  await sendEmail(verifyEmail);
+  await transporter.sendMail(verifyEmail);
 
   res.status(201).json({
     token,
