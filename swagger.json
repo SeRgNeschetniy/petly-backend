@@ -376,14 +376,7 @@
         "summary": "Obtaining contact information about services that provide services",
         "consumes": "multipart/form-data",
 
-        "parameters": [
-          {
-            "in": "formData",
-            "name": "upfile",
-            "type": "file",
-            "description": "The file to upload"
-          }
-        ],
+        "parameters": [],
 
         "responses": {
           "200": {
