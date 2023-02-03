@@ -6,7 +6,7 @@ const { nanoid } = require("nanoid");
 const { Pets } = require("../../models/pet");
 const { uploadImage } = require("../../middlewares/cloudinary");
 
-const photoDir = path.join(__dirname, "../../public", "images", "photopets");
+const photoDir = path.join(__dirname, "../../public", "images", "pets");
 
 const addPet = async (req, res) => {
   try {
