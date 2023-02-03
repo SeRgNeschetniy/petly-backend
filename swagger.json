@@ -9,8 +9,8 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "consumes": ["application/json", "multipart/form-data"],
-  "produces": ["application/json", "multipart/form-data"],
+  "consumes": ["application/json", "multipart/form-data", "image/png"],
+  "produces": ["application/json", "multipart/form-data", "image/png"],
   "servers": [
     { "url": "http://localhost:4000", "description": "Local" },
     {
@@ -216,8 +216,14 @@
       "patch": {
         "tags": ["Auth"],
         "summary": "Update user avatar",
+        "consumes": "image/png",
 
-        "parameters": [],
+        "parameters": [{          
+          "in": "formData",
+          "name": "upfile",
+          "type": "file",
+          "description": "The file to upload" 
+        }],
 
         "security": [{ "Bearer": [] }],
 
@@ -225,7 +231,7 @@
           "description": "User avatar object",
           "required": true,
           "content": {
-            "multipart/form-data": {}
+            "image/png": {}
           }
         },
 
@@ -304,7 +310,7 @@
 
         "responses": {
           "200": {
-            "description": "Verification successful"
+            "description": "Verification successful"            
           },
           "401": {
             "description": "Not authorized"
@@ -344,7 +350,12 @@
 
         "responses": {
           "200": {
-            "description": "Verification email sent"
+            "description": "Verification email sent",
+            "content": {
+              "application/json": {
+                "example": { "message": "Verification email sent" }
+              }
+            }
           },
           "400": { "description": "Verification has already been passed" },
           "404": {
