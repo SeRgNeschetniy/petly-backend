@@ -24,7 +24,7 @@
       "description": "Authorization endpoints"
     },
     {
-      "name": "Services-sidebar",
+      "name": "Our Friends",
       "description": "Services-sidebar endpoints"
     },
     {
@@ -179,13 +179,25 @@
 
         "security": [{ "Bearer": [] }],
 
+        "requestBody": {
+          "description": "Login object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserInfoRequest"
+              }
+            }
+          }
+        },
+
         "responses": {
           "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetUserInfoResponse"
+                  "$ref": "#/components/schemas/UpdateUserInfoRequest"
                 }
               }
             }
@@ -205,16 +217,17 @@
         "tags": ["Auth"],
         "summary": "Update user avatar",
 
-        "parameters": [
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": "true",
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
+
         "security": [{ "Bearer": [] }],
+
+        "requestBody": {
+          "description": "User avatar object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {}
+          }
+        },
 
         "responses": {
           "200": {
@@ -415,9 +428,11 @@
         "responses": {
           "200": {
             "description": "Successful operation",
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/noticeSchema"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/noticeSchema"
+                }
               }
             }
           },
@@ -662,7 +677,14 @@
 
         "responses": {
           "200": {
-            "description": "Successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/petsSchema"
+                }
+              }
+            }
           },
           "401": {
             "description": "Not authorized"
@@ -792,19 +814,24 @@
               "description": "User's email",
               "example": "bjohnson@gmail.com"
             },
-            "avatarURL": {
+            "token": {
               "type": "string",
-              "description": "avatar URL"
+              "description": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGE1MmY1MGJiMTVlOTM1NWRiMTMxYSIsImlhdCI6MTY3NTM3MTE2MSwiZXhwIjoxNjc1MzcyMDYxfQ.hesoLS6Xr6LZfjgpo-otp8eZCgCLoLKMWRYpojZ6cKE"
+            },
+            "refreshToken": {
+              "type": "string",
+              "description": "refreshToken",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGE1MmY1MGJiMTVlOTM1NWRiMTMxYSIsImlhdCI6MTY3NTM3MTE2MSwiZXhwIjoxNjc1MzcyMDYxfQ.hesoLS6Xr6LZfjgpo-otp8eZCgCLoLKMWRYpojZ6cKE"
             }
           }
         },
-        "example": [
-          {
-            "name": "Boris Johnson",
-            "email": "bjohnson@gmail.com",
-            "avatarURL": "string"
-          }
-        ]
+        "example": {
+          "name": "Boris Johnson",
+          "email": "bjohnson@gmail.com",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGE1MmY1MTMxYSIsImlhdCI6MTY3NTM3MTE2MSwiZXhwIjoxNjc1MzcyMDYxfQ.hesoLS6Xr6LZfjgpo-otp8eZCgCLoLKMWRYpojZ6cKE",
+          "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGE1MmY1MTMxYSIsImlhdCI6MTY3NTM3MTE2MSwiZXhwIjoxNjc1MzcyMDYxfQ.hesoLS6Xr6LZfjgpo-otp8eZCgCLoLKMWRYpojZ6cKE"
+        }
       },
 
       "LoginRequest": {
@@ -838,10 +865,19 @@
               "type": "string",
               "description": "User's email",
               "example": "bjohnson@gmail.com"
+            },
+            "token": {
+              "type": "string",
+              "description": "token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGE1MmY1MGJiMTVlOTM1NWRiMTMxYSIsImlhdCI6MTY3NTM3MTE2MSwiZXhwIjoxNjc1MzcyMDYxfQ.hesoLS6Xr6LZfjgpo-otp8eZCgCLoLKMWRYpojZ6cKE"
             }
           }
         },
-        "example": [{ "name": "Boris Johnson", "email": "bjohnson@gmail.com" }]
+        "example": {
+          "name": "Boris Johnson",
+          "email": "bjohnson@gmail.com",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGE1MmY1MTMxYSIsImlhdCI6MTY3NTM3MTE2MSwiZXhwIjoxNjc1MzcyMDYxfQ.hesoLS6Xr6LZfjgpo-otp8eZCgCLoLKMWRYpojZ6cKE"
+        }
       },
 
       "GetUserInfoRequest": {
@@ -874,6 +910,36 @@
           "avatarURL": {
             "type": "string",
             "description": "avatar URL"
+          }
+        }
+      },
+
+      "UpdateUserInfoRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "example": "bjohnson@gmail.com"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Boris Johnson"
+          },
+          "city": {
+            "type": "string",
+            "description": "User's city and region",
+            "example": "Brovary, Kyiv"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User's phone",
+            "example": "+380981112233"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "User's birthday"
           }
         }
       },
