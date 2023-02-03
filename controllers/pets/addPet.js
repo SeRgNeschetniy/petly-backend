@@ -23,15 +23,19 @@ const addPet = async (req, res) => {
       image.resize(182, 182).write(tempUpload);
 
       const photoNewPath = path.join(photoDir, fileName);
-      await fs.rename(tempUpload, photoNewPath);
 
+      await fs.rename(tempUpload, photoNewPath);
       const photoURL = await uploadImage(photoNewPath);
+
+      console.log(req.body);
+      console.log(photoURL);
 
       const addNewPet = await Pets.create({
         ...req.body,
         owner,
         photoPet: photoURL,
       });
+
       res.status(201).json(addNewPet);
     }
   } catch (error) {

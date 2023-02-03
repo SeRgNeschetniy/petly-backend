@@ -231,7 +231,8 @@
                 "properties": {
                   "avatar": {
                     "type": "string",
-                    "format": "binary"
+                    "format": "binary",
+                    "description": "File avatar"
                   }
                 }
               }
@@ -489,16 +490,53 @@
         "security": [{ "Bearer": [] }],
 
         "requestBody": {
-          "description": "User avatar object",
+          "description": "Notice object",
           "required": true,
           "content": {
             "multipart/form-data:": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "avatarURL": {
+                  "tittle": {
                     "type": "string",
-                    "format": "binary"
+                    "description": "Jack dog rasell"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Jack"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "description": "22.04.2018"
+                  },
+                  "breed": {
+                    "type": "string",
+                    "description": "Basenji"
+                  },
+                  "sex": {
+                    "type": "string",
+                    "description": "male"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "Lviv"
+                  },
+                  "price": {
+                    "type": "string",
+                    "description": "200$"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Comments: Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur   Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur  ipsum dolor sit amet, rem ipsum dolor sit amet,  ipsum sit"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "sell, lost-found, inGoodHands"
+                  },
+                  "petImage": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "File petImage"
                   }
                 }
               }
@@ -745,9 +783,32 @@
           "description": "Pets object",
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data:": {
               "schema": {
-                "$ref": "#/components/schemas/petsSchema"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Jack"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "description": "22.04.2018"
+                  },
+                  "breed": {
+                    "type": "string",
+                    "description": "Basenji"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Comments: Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur   Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur  ipsum dolor sit amet, rem ipsum dolor sit amet,  ipsum sit"
+                  },
+                  "photoPet": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "File photopets"
+                  }
+                }
               }
             }
           }
@@ -1160,22 +1221,20 @@
         "required": ["name", "bread", "comments"],
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "example": "Jack"
           },
           "dateOfBirth": {
-            "type": "string"
+            "type": "string",
+            "example": "22.04.2018"
           },
           "bread": {
-            "type": "string"
-          },
-          "photoPet": {
-            "type": "string"
+            "type": "string",
+            "example": "Basenji"
           },
           "comments": {
-            "type": "string"
-          },
-          "owner": {
-            "type": "object"
+            "type": "string",
+            "example": "Comments: Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur   Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur  Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur  ipsum dolor sit amet, rem ipsum dolor sit amet,  ipsum sit, "
           }
         }
       }
