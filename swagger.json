@@ -216,26 +216,35 @@
       "patch": {
         "tags": ["Auth"],
         "summary": "Update user avatar",
-        
-        "parameters": [],
 
         "security": [{ "Bearer": [] }],
+
+        "parameters": [],
 
         "requestBody": {
           "description": "User avatar object",
           "required": true,
           "content": {
-            "image/png": {}
+            "multipart/form-data:": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
           }
         },
-       
 
         "responses": {
           "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
-                "example": { "avatarURL": "string" }
+                "example": [{ "avatarURL": "string" }]
               }
             }
           },
@@ -305,7 +314,7 @@
 
         "responses": {
           "200": {
-            "description": "Verification successful"            
+            "description": "Verification successful"
           },
           "401": {
             "description": "Not authorized"
@@ -366,14 +375,15 @@
         "summary": "Obtaining contact information about services that provide services",
         "consumes": "multipart/form-data",
 
-        "parameters": [{          
-          "in": "formData",
-          "name": "upfile",
-          "type": "file",
-          "description": "The file to upload" 
-        }],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "upfile",
+            "type": "file",
+            "description": "The file to upload"
+          }
+        ],
 
-        
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -397,12 +407,7 @@
         "tags": ["News"],
         "summary": "Receiving news",
 
-        "parameters": [ {
-          "name": "search",
-          "in": "query",
-          "description": "Search news",          
-          "type": "string"
-      }],
+        "parameters": [],
 
         "responses": {
           "200": {
@@ -484,12 +489,18 @@
         "security": [{ "Bearer": [] }],
 
         "requestBody": {
-          "description": "Notice's object",
+          "description": "User avatar object",
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data:": {
               "schema": {
-                "$ref": "#/components/schemas/addNoticeSchema"
+                "type": "object",
+                "properties": {
+                  "avatarURL": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
               }
             }
           }
