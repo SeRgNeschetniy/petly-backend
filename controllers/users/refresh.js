@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { generateTokens } = require("../../helpers/generateTokens");
 const RequestError = require("../../helpers/requestError");
-const User = require("../../models/users");
+const User = require("../../models/user");
 
 const { REFRESH_SECRET_KEY } = process.env;
 

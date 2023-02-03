@@ -3,7 +3,7 @@ const path = require("path");
 const Jimp = require("jimp");
 const { nanoid } = require("nanoid");
 
-const User = require("../../models/users");
+const User = require("../../models/user");
 const RequestError = require("../../helpers/requestError");
 const { uploadImage } = require("../../middlewares/cloudinary");
 
