@@ -216,7 +216,7 @@
       "patch": {
         "tags": ["Auth"],
         "summary": "Update user avatar",
-
+        
         "parameters": [],
 
         "security": [{ "Bearer": [] }],
@@ -228,13 +228,14 @@
             "multipart/form-data": {}
           }
         },
+       
 
         "responses": {
           "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
-                "example": [{ "avatarURL": "string" }]
+                "example": { "avatarURL": "string" }
               }
             }
           },
@@ -304,7 +305,7 @@
 
         "responses": {
           "200": {
-            "description": "Verification successful"
+            "description": "Verification successful"            
           },
           "401": {
             "description": "Not authorized"
@@ -344,7 +345,12 @@
 
         "responses": {
           "200": {
-            "description": "Verification email sent"
+            "description": "Verification email sent",
+            "content": {
+              "application/json": {
+                "example": { "message": "Verification email sent" }
+              }
+            }
           },
           "400": { "description": "Verification has already been passed" },
           "404": {
@@ -356,11 +362,18 @@
 
     "/api/friends": {
       "get": {
-        "tags": ["Services-sidebar"],
+        "tags": ["Our Friends"],
         "summary": "Obtaining contact information about services that provide services",
+        "consumes": "multipart/form-data",
 
-        "parameters": [],
+        "parameters": [{          
+          "in": "formData",
+          "name": "upfile",
+          "type": "file",
+          "description": "The file to upload" 
+        }],
 
+        
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -384,7 +397,12 @@
         "tags": ["News"],
         "summary": "Receiving news",
 
-        "parameters": [],
+        "parameters": [ {
+          "name": "search",
+          "in": "query",
+          "description": "Search news",          
+          "type": "string"
+      }],
 
         "responses": {
           "200": {
@@ -422,6 +440,18 @@
               "type": "string",
               "example": "sell"
             }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page pagination",
+            "type": "integer"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit for pagination",
+            "type": "integer"
           }
         ],
 
