@@ -819,7 +819,7 @@
     "pixelmatch" "^4.0.2"
     "tinycolor2" "^1.4.1"
 
-"@jimp/custom@^0.16.2", "@jimp/custom@>=0.3.5":
+"@jimp/custom@^0.16.2":
   "integrity" "sha512-GtNwOs4hcVS2GIbqRUf42rUuX07oLB92cj7cqxZb0ZGWwcwhnmSW0TFLAkNafXmqn9ug4VTpNvcJSUdiuECVKg=="
   "resolved" "https://registry.npmjs.org/@jimp/custom/-/custom-0.16.2.tgz"
   "version" "0.16.2"
@@ -846,7 +846,7 @@
     "@jimp/utils" "^0.16.2"
     "jpeg-js" "^0.4.2"
 
-"@jimp/plugin-blit@^0.16.2", "@jimp/plugin-blit@>=0.3.5":
+"@jimp/plugin-blit@^0.16.2":
   "integrity" "sha512-Z31rRfV80gC/r+B/bOPSVVpJEWXUV248j7MdnMOFLu4vr8DMqXVo9jYqvwU/s4LSTMAMXqm4Jg6E/jQfadPKAg=="
   "resolved" "https://registry.npmjs.org/@jimp/plugin-blit/-/plugin-blit-0.16.2.tgz"
   "version" "0.16.2"
@@ -854,7 +854,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.16.2"
 
-"@jimp/plugin-blur@^0.16.2", "@jimp/plugin-blur@>=0.3.5":
+"@jimp/plugin-blur@^0.16.2":
   "integrity" "sha512-ShkJCAzRI+1fAKPuLLgEkixpSpVmKTYaKEFROUcgmrv9AansDXGNCupchqVMTdxf8zPyW8rR1ilvG3OJobufLQ=="
   "resolved" "https://registry.npmjs.org/@jimp/plugin-blur/-/plugin-blur-0.16.2.tgz"
   "version" "0.16.2"
@@ -870,7 +870,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.16.2"
 
-"@jimp/plugin-color@^0.16.2", "@jimp/plugin-color@>=0.8.0":
+"@jimp/plugin-color@^0.16.2":
   "integrity" "sha512-6oBV0g0J17/7E+aTquvUsgSc85nUbUi+64tIK5eFIDzvjhlqhjGNJYlc46KJMCWIs61qRJayQoZdL/iT/iQuGQ=="
   "resolved" "https://registry.npmjs.org/@jimp/plugin-color/-/plugin-color-0.16.2.tgz"
   "version" "0.16.2"
@@ -895,7 +895,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.16.2"
 
-"@jimp/plugin-crop@^0.16.2", "@jimp/plugin-crop@>=0.3.5":
+"@jimp/plugin-crop@^0.16.2":
   "integrity" "sha512-qCd3hfMEE+Z2EuuyXewgXRTtKJGIerWzc1zLEJztsUkPz5i73IGgkOL+mrNutZwGaXZbm+8SwUaGb46sxAO6Tw=="
   "resolved" "https://registry.npmjs.org/@jimp/plugin-crop/-/plugin-crop-0.16.2.tgz"
   "version" "0.16.2"
@@ -976,7 +976,7 @@
     "@jimp/utils" "^0.16.2"
     "load-bmfont" "^1.4.0"
 
-"@jimp/plugin-resize@^0.16.2", "@jimp/plugin-resize@>=0.3.5", "@jimp/plugin-resize@>=0.8.0":
+"@jimp/plugin-resize@^0.16.2":
   "integrity" "sha512-gE4N9l6xuwzacFZ2EPCGZCJ/xR+aX2V7GdMndIl/6kYIw5/eib1SFuF9AZLvIPSFuE1FnGo8+vT0pr++SSbhYg=="
   "resolved" "https://registry.npmjs.org/@jimp/plugin-resize/-/plugin-resize-0.16.2.tgz"
   "version" "0.16.2"
@@ -984,7 +984,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.16.2"
 
-"@jimp/plugin-rotate@^0.16.2", "@jimp/plugin-rotate@>=0.3.5":
+"@jimp/plugin-rotate@^0.16.2":
   "integrity" "sha512-/CTEYkR1HrgmnE0VqPhhbBARbDAfFX590LWGIpxcYIYsUUGQCadl+8Qo4UX13FH0Nt8UHEtPA+O2x08uPYg9UA=="
   "resolved" "https://registry.npmjs.org/@jimp/plugin-rotate/-/plugin-rotate-0.16.2.tgz"
   "version" "0.16.2"
@@ -992,7 +992,7 @@
     "@babel/runtime" "^7.7.2"
     "@jimp/utils" "^0.16.2"
 
-"@jimp/plugin-scale@^0.16.2", "@jimp/plugin-scale@>=0.3.5":
+"@jimp/plugin-scale@^0.16.2":
   "integrity" "sha512-3inuxfrlquyLaqFdiiiQNJUurR0WbvN5wAf1qcYX2LubG1AG8grayYD6H7XVoxfUGTZXh1kpmeirEYlqA2zxcw=="
   "resolved" "https://registry.npmjs.org/@jimp/plugin-scale/-/plugin-scale-0.16.2.tgz"
   "version" "0.16.2"
@@ -1206,7 +1206,7 @@
   "resolved" "https://registry.npmjs.org/acorn-walk/-/acorn-walk-8.2.0.tgz"
   "version" "8.2.0"
 
-"acorn@^6.0.0 || ^7.0.0 || ^8.0.0", "acorn@^7.4.0":
+"acorn@^7.4.0":
   "integrity" "sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A=="
   "resolved" "https://registry.npmjs.org/acorn/-/acorn-7.4.1.tgz"
   "version" "7.4.1"
@@ -2025,7 +2025,7 @@
     "eslint-utils" "^2.0.0"
     "regexpp" "^3.0.0"
 
-"eslint-plugin-import@^2.22.1", "eslint-plugin-import@2.25.3":
+"eslint-plugin-import@2.25.3":
   "integrity" "sha512-RzAVbby+72IB3iOEL8clzPLzL3wpDrlwjsTBAQXgyp5SeTqqY+0bFubwuo+y/HLhNZcXV4XqTBO4LGsfyHIDXg=="
   "resolved" "https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.25.3.tgz"
   "version" "2.25.3"
@@ -2056,7 +2056,7 @@
     "resolve" "^1.10.1"
     "semver" "^6.1.0"
 
-"eslint-plugin-promise@^4.2.1 || ^5.0.0", "eslint-plugin-promise@5.2.0":
+"eslint-plugin-promise@5.2.0":
   "integrity" "sha512-SftLb1pUG01QYq2A/hGAWfDRXqYD82zE7j7TopDOyNdU+7SvvoXREls/+PRTY17vUXzXnZA/zfnyKgRH6x4JJw=="
   "resolved" "https://registry.npmjs.org/eslint-plugin-promise/-/eslint-plugin-promise-5.2.0.tgz"
   "version" "5.2.0"
@@ -2091,7 +2091,7 @@
   "resolved" "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-2.1.0.tgz"
   "version" "2.1.0"
 
-"eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8", "eslint@^7.0.0", "eslint@^7.12.1", "eslint@>=4.19.1", "eslint@>=5.16.0", "eslint@>=7.0.0", "eslint@7.19.0":
+"eslint@7.19.0":
   "integrity" "sha512-CGlMgJY56JZ9ZSYhJuhow61lMPPjUzWmChFya71Z/jilVos7mR/jPgaEfVGgMBY5DshbKdG8Ezb8FDCHcoMEMg=="
   "resolved" "https://registry.npmjs.org/eslint/-/eslint-7.19.0.tgz"
   "version" "7.19.0"
@@ -2192,7 +2192,7 @@
   "resolved" "https://registry.npmjs.org/exif-parser/-/exif-parser-0.1.12.tgz"
   "version" "0.1.12"
 
-"express@>=4.0.0", "express@4.17.1":
+"express@4.17.1":
   "integrity" "sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g=="
   "resolved" "https://registry.npmjs.org/express/-/express-4.17.1.tgz"
   "version" "4.17.1"
@@ -3074,7 +3074,7 @@
   "resolved" "https://registry.npmjs.org/lodash.truncate/-/lodash.truncate-4.4.2.tgz"
   "version" "4.4.2"
 
-"lodash@^4.17.20", "lodash@^4.17.21", "lodash@>=4.0":
+"lodash@^4.17.20", "lodash@^4.17.21":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"

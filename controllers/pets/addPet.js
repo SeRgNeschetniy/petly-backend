@@ -11,12 +11,7 @@ const photoDir = path.join(__dirname, "../../public", "images", "photopets");
 const addPet = async (req, res) => {
   try {
     if (!req.file) {
-      const { _id: owner } = req.user;
-      const addNewPet = await Pets.create({
-        ...req.body,
-        owner,
-      });
-      res.status(201).json(addNewPet);
+      res.status(206).json({ message: "Probably no pet's photo, add photo" });
     } else {
       const { path: tempUpload, originalname } = req.file;
 
