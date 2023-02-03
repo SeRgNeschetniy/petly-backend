@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const { nanoid } = require("nanoid");
 
-const User = require("../../models/users");
+const User = require("../../models/user");
 const RequestError = require("../../helpers/requestError");
 const sendEmail = require("../../helpers/sendEmail");
 const { generateTokens } = require("../../helpers/generateTokens");

@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 
-const User = require("../../models/users");
+const User = require("../../models/user");
 const RequestError = require("../../helpers/requestError");
 const { generateTokens } = require("../../helpers/generateTokens");
 

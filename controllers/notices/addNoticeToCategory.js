@@ -1,5 +1,5 @@
 const { Notice } = require("../../models/notice");
-const User = require("../../models/users");
+const User = require("../../models/user");
 const RequestError = require("../../helpers/requestError");
 const { uploadImage } = require("../../middlewares/cloudinary");
 

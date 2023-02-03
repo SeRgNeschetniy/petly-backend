@@ -1,6 +1,6 @@
 const { generateTokens } = require("../../helpers/generateTokens");
 
-const User = require("../../models/users");
+const User = require("../../models/user");
 
 const { BASE_URL, PORT } = process.env;
 
