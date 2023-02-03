@@ -28,15 +28,11 @@ const addNoticeToCategory = async (req, res) => {
   await fs.rename(tempUpload, resultUpload);
   const petImage = await uploadImage(resultUpload);
 
-  console.log(petImage);
-
   const notice = await Notice.findOne({ title, name, dateOfBirth, breed });
 
   if (notice) {
     throw RequestError(400, "Notice already exist");
   }
-
-  console.log(req.body);
 
   const newNotice = await Notice.create({
     ...req.body,

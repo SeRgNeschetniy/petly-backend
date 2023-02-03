@@ -9,8 +9,6 @@ const addNoticeSchema = require("../../schemas/notice");
 
 const router = express.Router();
 
-router.get("/:categoryName", ctrlWrapper(ctrl.getNoticeByCategory));
-
 router.post(
   "/",
   authenticate,
@@ -35,5 +33,7 @@ router.delete(
 
 router.get("/own", authenticate, ctrlWrapper(ctrl.getUserNotices));
 router.delete("/:noticeId", authenticate, ctrlWrapper(ctrl.deleteUserNotice));
+
+router.get("/:categoryName", ctrlWrapper(ctrl.getNoticeByCategory));
 
 module.exports = router;
