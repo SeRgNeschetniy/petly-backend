@@ -8,7 +8,13 @@ dotenv.config();
 mongoose.set("strictQuery", true);
 
 const uploadDir = path.join(process.cwd(), "tmp");
-const storeImage = path.join(process.cwd(), "public", "images", "avatars");
+const storeImageAvatars = path.join(
+  process.cwd(),
+  "public",
+  "images",
+  "avatars"
+);
+const storeImagePets = path.join(process.cwd(), "public", "images", "pets");
 
 const app = require("./app");
 
@@ -32,7 +38,8 @@ mongoose
   .then(() => {
     app.listen(PORT, () => {
       createFolderIsNotExist(uploadDir);
-      createFolderIsNotExist(storeImage);
+      createFolderIsNotExist(storeImageAvatars);
+      createFolderIsNotExist(storeImagePets);
       console.log(
         "\x1b[46m",
         `==>Server running. Use our API on port: ${PORT}<==`,

@@ -14,7 +14,7 @@ router.get("/:categoryName", ctrlWrapper(ctrl.getNoticeByCategory));
 router.post(
   "/",
   authenticate,
-  validator(addNoticeSchema),
+  //  validator(addNoticeSchema),
   upload.single("petImage"),
   ctrlWrapper(ctrl.addNoticeToCategory)
 );

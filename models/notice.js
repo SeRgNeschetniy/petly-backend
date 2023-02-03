@@ -1,53 +1,55 @@
-const { model, Schema } = require('mongoose');
+const { model, Schema } = require("mongoose");
 
-const handleSchemaErrors = require('../middlewares/handleSchemaErrors');
+const handleSchemaErrors = require("../middlewares/handleSchemaErrors");
 
-const noticeSchema = new Schema({
-    tittle: {
-        type: String,
-        required: [true, 'Title of add is required.']
+const noticeSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "Title of add is required."],
     },
     name: {
-        type: String,
+      type: String,
     },
     dateOfBirth: {
-        type: String,
+      type: String,
     },
-     breed: {
-        type: String,
+    breed: {
+      type: String,
     },
     sex: {
-        type: String,
-        enum: ['male', 'female'],
-        required: [true, 'Sex is required.']
+      type: String,
+      enum: ["male", "female"],
+      required: [true, "Sex is required."],
     },
     location: {
-        type: String,
-        required: [true, 'Location is required.']
+      type: String,
+      required: [true, "Location is required."],
     },
     price: {
-        type: String
+      type: String,
     },
     comments: {
-        type: String
+      type: String,
     },
     category: {
-        type: String,
-        enum: ['sell', 'lost-found', 'inGoodHands'],
-        required: [true, 'Category is required.']
+      type: String,
+      enum: ["sell", "lost-found", "inGoodHands"],
+      required: [true, "Category is required."],
     },
     petImage: {
-        type: String,
+      type: String,
     },
-     owner: {
+    owner: {
       type: Schema.Types.ObjectId,
-      ref: 'user',
-    }
+      ref: "user",
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
 
-}, { versionKey: false, timestamps: true });
-
-noticeSchema.post('save', handleSchemaErrors);
+noticeSchema.post("save", handleSchemaErrors);
 
 const Notice = model("notice", noticeSchema);
 
-module.exports = { Notice, noticeSchema};
+module.exports = { Notice, noticeSchema };
