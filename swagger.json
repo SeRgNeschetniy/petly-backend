@@ -122,15 +122,8 @@
         "tags": ["Auth"],
         "summary": "Log out user",
 
-        "parameters": [
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": "true",
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
+
         "security": [{ "Bearer": [] }],
 
         "responses": {
@@ -152,15 +145,8 @@
         "tags": ["Auth"],
         "summary": "Get information about the current user",
 
-        "parameters": [
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": "true",
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
+
         "security": [{ "Bearer": [] }],
 
         "responses": {
@@ -189,15 +175,8 @@
         "tags": ["Auth"],
         "summary": "Update information about the current user",
 
-        "parameters": [
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": "true",
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
+
         "security": [{ "Bearer": [] }],
 
         "responses": {
@@ -308,15 +287,7 @@
         "tags": ["Auth"],
         "summary": "Update user token",
 
-        "parameters": [
-          {
-            "in": "path",
-            "name": "authorization",
-            "required": "true",
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
 
         "responses": {
           "200": {
@@ -335,15 +306,7 @@
         "tags": ["Auth"],
         "summary": "Verify user Email",
 
-        "parameters": [
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": "true",
-            "type": "string",
-            "description": "The token issued to the current user"
-          }
-        ],
+        "parameters": [],
 
         "security": [{ "Bearer": [] }],
 

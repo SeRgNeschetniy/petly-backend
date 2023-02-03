@@ -22,7 +22,6 @@ const petsSchema = new Schema(
     },
     photoPet: {
       type: String,
-      // required: [true, "Please, upload your pet's photo"],
     },
     comment: {
       type: String,
