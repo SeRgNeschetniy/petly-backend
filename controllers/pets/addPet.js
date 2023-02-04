@@ -25,9 +25,6 @@ const addPet = async (req, res) => {
     await fs.rename(tempUpload, photoNewPath);
     const photoURL = await uploadImage(photoNewPath);
 
-    console.log(req.body);
-    console.log(photoURL);
-
     const addNewPet = await Pets.create({
       ...req.body,
       owner,

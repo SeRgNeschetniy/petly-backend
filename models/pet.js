@@ -10,8 +10,8 @@ const petsSchema = new Schema(
       maxlength: [16, "Max length 16 characters"],
     },
     dateOfBirth: {
-      type: String,
-      default: ["dd.mm.yyyy"],
+      type: Date,
+      required: [true, "YYYY-MM-DD"],
     },
     breed: {
       type: String,
@@ -39,10 +39,10 @@ const petsSchema = new Schema(
 );
 
 const addSchema = Joi.object({
-  //name: Joi.string().required(),
-  //dateOfBirth: Joi.date(),
-  //breed: Joi.string().required(),
-  //сomment: Joi.string().required(),
+  name: Joi.string().required(),
+  dateOfBirth: Joi.date(),
+  breed: Joi.string().required(),
+  сomment: Joi.string().required(),
 });
 
 const schema = {
