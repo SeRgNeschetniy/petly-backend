@@ -7,7 +7,7 @@ const addNoticeToFavorites = async (req, res) => {
 
   const user = await User.updateOne(
     { _id: userId },
-    { $push: { favorites: noticeId } }
+    { $addToSet: { favorites: noticeId } }
   );
 
   if (!user) {
