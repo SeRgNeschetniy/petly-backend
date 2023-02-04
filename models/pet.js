@@ -12,6 +12,7 @@ const petsSchema = new Schema(
     dateOfBirth: {
       type: Date,
       required: [true, "YYYY-MM-DD"],
+
     },
     breed: {
       type: String,

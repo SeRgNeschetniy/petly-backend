@@ -2,7 +2,7 @@ const { Pets } = require("../../models/pet");
 
 const getUsersPet = async (req, res, t) => {
   const { _id: owner } = req.user;
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 20 } = req.query;
   const skip = (page - 1) * limit;
 
   const AllUsersPets = await Pets.find(
