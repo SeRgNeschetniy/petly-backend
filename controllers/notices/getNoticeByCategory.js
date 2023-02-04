@@ -8,9 +8,16 @@ const getNoticeByCategory = async (req, res) => {
   const skip = (parseInt(page) - 1) * limit;
   limit = parseInt(limit) > 20 ? 20 : limit;
 
+  const querySearch = {
+    category: categoryName,
+  };
+
+  if (query) {
+    querySearch.title = { $regex: query, $options: "i" };
+  }
+
   const notices = await Notice.find(
-    query,
-    { category: categoryName },
+    { ...querySearch },
     { createdAt: 0, updatedAt: 0 },
     { skip, limit }
   );
