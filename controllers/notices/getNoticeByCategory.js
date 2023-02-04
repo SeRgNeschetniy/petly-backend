@@ -14,6 +14,8 @@ const getNoticeByCategory = async (req, res) => {
 
   if (query) {
     querySearch.title = { $regex: query, $options: "i" };
+    querySearch.comments = { $regex: query, $options: "i" };
+    querySearch.breed = { $regex: query, $options: "i" };
   }
 
   const notices = await Notice.find(
