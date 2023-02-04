@@ -2,10 +2,14 @@ const { Schema, model } = require("mongoose");
 
 const handleSchemaErrors = require("../middlewares/handleSchemaErrors");
 
+const emailRegexp =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 const userSchema = new Schema(
   {
     email: {
       type: String,
+      match: emailRegexp,
       required: [true, "Email is required"],
       unique: true,
     },
@@ -24,11 +28,9 @@ const userSchema = new Schema(
     },
     city: {
       type: String,
-      required: [true, "City is required"],
     },
     phone: {
       type: String,
-      required: [true, "Mobile phone is required"],
     },
     avatarURL: {
       type: String,
