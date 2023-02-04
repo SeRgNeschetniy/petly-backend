@@ -3,12 +3,13 @@ const { RequestError } = require("../../helpers/requestError");
 
 const getNoticeByCategory = async (req, res) => {
   const { categoryName } = req.params;
-  let { page = 1, limit = 10 } = req.query;
+  let { page = 1, limit = 8, query } = req.query;
 
   const skip = (parseInt(page) - 1) * limit;
   limit = parseInt(limit) > 20 ? 20 : limit;
 
   const notices = await Notice.find(
+    query,
     { category: categoryName },
     { createdAt: 0, updatedAt: 0 },
     { skip, limit }
