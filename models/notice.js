@@ -12,7 +12,7 @@ const noticeSchema = new Schema(
       type: String,
     },
     dateOfBirth: {
-      type: String,
+      type: Date,
     },
     breed: {
       type: String,
