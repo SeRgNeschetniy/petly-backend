@@ -10,7 +10,7 @@ const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, BASE_URL, PORT } = process.env;
 const googleParams = {
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: `${BASE_URL}:${PORT}/api/users/google/callback`,
+  callbackURL: `https://petly-backend-vopf.onrender.com/api/users/google/callback`,
   passReqCallback: true,
 };
 
