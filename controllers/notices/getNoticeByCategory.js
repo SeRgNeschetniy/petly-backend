@@ -8,21 +8,28 @@ const getNoticeByCategory = async (req, res) => {
   const skip = (parseInt(page) - 1) * limit;
   limit = parseInt(limit) > 20 ? 20 : limit;
 
-  const querySearch = {
-    category: categoryName,
-  };
+  let notices = [];
 
-  if (query) {
-    querySearch.title = { $regex: query, $options: "i" };
-    querySearch.comments = { $regex: query, $options: "i" };
-    querySearch.breed = { $regex: query, $options: "i" };
+  if (!query) {
+    notices = await Notice.find(
+      { category: categoryName },
+      { createdAt: 0, updatedAt: 0 },
+      { skip, limit }
+    );
+  } else {
+    notices = await Notice.find(
+      {
+        category: categoryName,
+        $or: [
+          { title: { $regex: query, $options: "i" } },
+          { comments: { $regex: query, $options: "i" } },
+          { breed: { $regex: query, $options: "i" } },
+        ],
+      },
+      { createdAt: 0, updatedAt: 0 },
+      { skip, limit }
+    );
   }
-
-  const notices = await Notice.find(
-    { ...querySearch },
-    { createdAt: 0, updatedAt: 0 },
-    { skip, limit }
-  );
 
   if (!notices) {
     throw new RequestError("Unable to get data from DB.");
