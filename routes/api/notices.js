@@ -36,4 +36,6 @@ router.delete("/:noticeId", authenticate, ctrlWrapper(ctrl.deleteUserNotice));
 
 router.get("/:categoryName", ctrlWrapper(ctrl.getNoticeByCategory));
 
+router.get("/search/:name", ctrlWrapper(ctrl.getNoticeByName));
+
 module.exports = router;
