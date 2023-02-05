@@ -29,7 +29,7 @@ const register = async (req, res) => {
 
   console.log(newUser._id);
 
-  const { token, refreshToken } = generateTokens(newUser._id);
+  const { token, refreshToken } = await generateTokens(newUser._id);
 
   await User.findByIdAndUpdate(newUser._id, { token, refreshToken });
 
@@ -52,6 +52,7 @@ const register = async (req, res) => {
   res.status(201).json({
     token,
     refreshToken,
+    verificationToken,
     user: {
       name: newUser.name,
       email: newUser.email,
