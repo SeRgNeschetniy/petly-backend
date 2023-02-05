@@ -13,8 +13,14 @@ const registerSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().pattern(passwordRegexp).min(7).max(32).required(),
   name: Joi.string().pattern(nameRegexp).required(),
-  city: Joi.string().pattern(cityRegexp).required(),
-  phone: Joi.string().pattern(phoneRegexp, "numbers").required(),
+  city: Joi.string()
+    .pattern(cityRegexp)
+    .message("city fails to match the required pattern: city, region")
+    .required(),
+  phone: Joi.string()
+    .pattern(phoneRegexp, "numbers")
+    .message("number fails to match the required pattern: +380XXXXXXXXX")
+    .required(),
 });
 
 const loginSchema = Joi.object({
@@ -26,8 +32,12 @@ const updateUserSchema = Joi.object({
   name: Joi.string().pattern(nameRegexp),
   email: Joi.string().pattern(emailRegexp),
   birthday: Joi.string().pattern(birthdayRegexp),
-  phone: Joi.string().pattern(phoneRegexp, "numbers"),
-  city: Joi.string().pattern(cityRegexp),
+  phone: Joi.string()
+    .pattern(phoneRegexp, "numbers")
+    .message("number fails to match the required pattern: +380XXXXXXXXX"),
+  city: Joi.string()
+    .pattern(cityRegexp)
+    .message("city fails to match the required pattern: city, region"),
 });
 
 const emailSchema = Joi.object({
