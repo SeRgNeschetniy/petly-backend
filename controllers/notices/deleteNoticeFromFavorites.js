@@ -9,6 +9,8 @@ const deleteNoticeFromFavorites = async (req, res) => {
     { _id: userId },
     { $pull: { favorites: noticeId } }
   );
+
+  
   if (!user) {
     throw RequestError("Unable to delete Notice from favorites.");
   }
