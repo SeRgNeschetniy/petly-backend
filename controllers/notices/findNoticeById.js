@@ -6,7 +6,7 @@ const findNoticeById = async (req, res) => {
 
   console.log(id);
 
-  const result = await Notice.findById(id);
+  const result = await Notice.findById(id).populate("owner");
 
   console.log(result);
 
