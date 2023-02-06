@@ -31,9 +31,9 @@ router.delete(
   ctrlWrapper(ctrl.deleteNoticeFromFavorites)
 );
 
-router.get("/own", authenticate, ctrlWrapper(ctrl.getUserNotices));
 router.delete("/:noticeId", authenticate, ctrlWrapper(ctrl.deleteUserNotice));
 
 router.get("/:categoryName", ctrlWrapper(ctrl.getNoticeByCategory));
+router.get("/own", authenticate, ctrlWrapper(ctrl.getUserNotices));
 
 module.exports = router;
