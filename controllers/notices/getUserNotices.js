@@ -6,7 +6,7 @@ const getUserNotices = async (req, res) => {
   const notices = await Notice.find({ owner });
 
   if (!notices) {
-    throw RequestError("Unable to get Notices.");
+    throw RequestError("Unable to get Notices. ");
   }
 
   res.status(200).json({ status: "success", notices });
