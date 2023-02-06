@@ -6,7 +6,10 @@ const findNoticeById = async (req, res) => {
 
   console.log(id);
 
-  const result = await Notice.findById(id).populate("owner");
+  const result = await Notice.find({ _id: id }).populate(
+    "owner",
+    "email phone"
+  );
 
   console.log(result);
 
