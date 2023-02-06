@@ -490,7 +490,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "tittle": {
+                  "title": {
                     "type": "string",
                     "description": "Jack dog rasell"
                   },
@@ -524,7 +524,7 @@
                   },
                   "category": {
                     "type": "string",
-                    "description": "sell, lost-found, inGoodHands"
+                    "description": "sell, lost-found, for-free"
                   },
                   "petImage": {
                     "type": "string",

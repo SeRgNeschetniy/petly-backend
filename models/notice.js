@@ -6,7 +6,7 @@ const noticeSchema = new Schema(
   {
     title: {
       type: String,
-      required: [true, "Title of add is required."],
+      //required: [true, "Title of add is required."],
     },
     name: {
       type: String,

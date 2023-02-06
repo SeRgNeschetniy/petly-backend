@@ -12,7 +12,7 @@ const router = express.Router();
 router.post(
   "/",
   authenticate,
-  // validator(addNoticeSchema),
+  validator(addNoticeSchema),
   upload.single("petImage"),
   ctrlWrapper(ctrl.addNoticeToCategory)
 );

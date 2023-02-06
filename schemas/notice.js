@@ -5,23 +5,24 @@ const dateOfBirthRegExp =
 
 const addNoticeSchema = Joi.object({
   title: Joi.string()
-    .pattern(/^[a-zA-Z\s]+$/)
+    .pattern(/^[а-яА-ЯёЁіІїЇa-zA-Z0-9]+$/)
     .min(2)
-    .max(48)
-    .required(),
+    .max(48),
   name: Joi.string()
-    .pattern(/^[a-zA-Z\s]+$/)
+    .pattern(/^[а-яА-ЯёЁіІїЇa-zA-Z0-9]+$/)
     .min(2)
     .max(16),
   dateOfBirth: Joi.string().pattern(dateOfBirthRegExp),
   breed: Joi.string()
-    .pattern(/^[a-zA-Z\s]+$/)
+    .pattern(/^[а-яА-ЯёЁіІїЇa-zA-Z0-9]+$/)
     .min(2)
     .max(24),
   sex: Joi.string().valid("male", "female"),
-  location: Joi.string().pattern(/^[a-zA-Z]+,?\s[a-zA-Z]+$/),
-  price: Joi.number().min(1).required(),
-  comments: Joi.string().min(8).max(120).required(),
+  location: Joi.string().pattern(
+    /^[а-яА-ЯёЁіІїЇa-zA-Z0-9]+,?\s[а-яА-ЯёЁіІїЇa-zA-Z0-9]+$/
+  ),
+  price: Joi.string(),
+  comments: Joi.string().min(8).max(120),
   category: Joi.string().valid("lost-found", "inGoodHands", "sell"),
   petImage: Joi.string(),
 });
