@@ -23,7 +23,7 @@ const addNoticeSchema = Joi.object({
   ),
   price: Joi.string(),
   comments: Joi.string().min(8).max(120),
-  category: Joi.string().valid("lost-found", "inGoodHands", "sell"),
+  category: Joi.string().valid("lost-found", "for-free", "sell"),
   petImage: Joi.string(),
 });
 
