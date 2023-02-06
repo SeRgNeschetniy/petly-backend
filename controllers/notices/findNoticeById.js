@@ -3,15 +3,10 @@ const RequestError = require("../../helpers/requestError");
 
 const findNoticeById = async (req, res) => {
   const { id } = req.params;
-
-  console.log(id);
-
   const result = await Notice.find({ _id: id }).populate(
     "owner",
     "email phone"
   );
-
-  console.log(result);
 
   if (!result) {
     throw RequestError(404, "Notice not found");

@@ -8,8 +8,6 @@ const { REFRESH_SECRET_KEY } = process.env;
 const refresh = async (req, res) => {
   const { refreshToken } = req.cookies;
 
-  console.log(refreshToken);
-
   if (!refreshToken) {
     throw RequestError(401, "Not authorized");
   }

@@ -20,13 +20,11 @@ const uploadImage = async (imagePath) => {
 
   try {
     const result = await cloudinary.uploader.upload(imagePath, options);
-    // console.log(result);
     return result.url;
   } catch (error) {
     console.error(error);
   }
 };
-
 
 const getAssetInfo = async (publicId) => {
   const options = {
@@ -35,7 +33,6 @@ const getAssetInfo = async (publicId) => {
 
   try {
     const result = await cloudinary.api.resource(publicId, options);
-    console.log(result);
     return result.colors;
   } catch (error) {
     console.error(error);
