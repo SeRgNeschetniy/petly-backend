@@ -1,4 +1,3 @@
-const User = require("../../models/user");
 const { Notice } = require("../../models/notice");
 const { RequestError } = require("../../helpers/requestError");
 
