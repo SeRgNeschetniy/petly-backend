@@ -1,14 +1,14 @@
 const User = require("../../models/user");
+const { Notice } = require("../../models/notice");
 const { RequestError } = require("../../helpers/requestError");
 
 const getUserNotices = async (req, res) => {
-  const { id } = req.user;
-  const user = await User.findById(id).populate("notices");
+  const { _id: owner } = req.user;
+  const notices = await Notice.find({ owner });
 
-  if (!user) {
+  if (!notices) {
     throw RequestError("Unable to get Notices.");
   }
-  const notices = user.notices;
 
   res.status(200).json({ status: "success", notices });
 };
