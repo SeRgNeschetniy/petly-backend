@@ -6,9 +6,18 @@ const addNoticeToFavorites = async (req, res) => {
   const { noticeId } = req.params;
   const { id: userId } = req.user;
 
-  await User.updateOne({ _id: userId }, { $addToSet: { favorites: noticeId } });
+  const user = await User.updateOne(
+    { _id: userId },
+    { $addToSet: { favorites: noticeId } }
+  );
 
-  res.status(200).json("Notice was added to favorites.");
+  if (!user) {
+    throw RequestError("Unable to add Notice to favorites.");
+  }
+
+  const notices = await Notice.findOne({ _id: noticeId });
+
+  res.status(200).json({ notices });
 };
 
 module.exports = addNoticeToFavorites;
