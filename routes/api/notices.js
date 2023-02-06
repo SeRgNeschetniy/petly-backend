@@ -33,7 +33,7 @@ router.delete(
 
 router.delete("/:noticeId", authenticate, ctrlWrapper(ctrl.deleteUserNotice));
 
-router.get("/:categoryName", ctrlWrapper(ctrl.getNoticeByCategory));
 router.get("/own", authenticate, ctrlWrapper(ctrl.getUserNotices));
+router.get("/:categoryName", ctrlWrapper(ctrl.getNoticeByCategory));
 
 module.exports = router;
