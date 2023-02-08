@@ -6,7 +6,6 @@ const validator = (schema) => {
     if (error) {
       next(RequestError(400, error.message));
     }
-
     next();
   };
 };
