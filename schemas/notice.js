@@ -5,21 +5,21 @@ const dateOfBirthRegExp =
 
 const addNoticeSchema = Joi.object({
   title: Joi.string()
-    .pattern(/^[а-яА-ЯёЁіІїЇa-zA-Z0-9]+$/)
+    .pattern(/^[а-яА-ЯёЁіІїЇєЄa-zA-Z0-9]+$/)
     .min(2)
     .max(48),
   name: Joi.string()
-    .pattern(/^[а-яА-ЯёЁіІїЇa-zA-Z0-9]+$/)
+    .pattern(/^[а-яА-ЯёЁіІїЇєЄa-zA-Z0-9]+$/)
     .min(2)
     .max(16),
   dateOfBirth: Joi.string().pattern(dateOfBirthRegExp),
   breed: Joi.string()
-    .pattern(/^[а-яА-ЯёЁіІїЇa-zA-Z0-9]+$/)
+    .pattern(/^[а-яА-ЯёЁіІїЇєЄa-zA-Z0-9]+$/)
     .min(2)
     .max(24),
   sex: Joi.string().valid("male", "female"),
   location: Joi.string().pattern(
-    /^[а-яА-ЯёЁіІїЇa-zA-Z0-9]+,?\s[а-яА-ЯёЁіІїЇa-zA-Z0-9]+$/
+    /^[а-яА-ЯёЁіІїЇєЄa-zA-Z0-9]+,?\s[а-яА-ЯёЁіІїЇєЄa-zA-Z0-9]+$/
   ),
   price: Joi.string(),
   comments: Joi.string().min(8).max(120),
