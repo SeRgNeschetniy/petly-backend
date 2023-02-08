@@ -31,7 +31,19 @@ const getNoticeByCategory = async (req, res) => {
     );
   }
 
-  const total = await Notice.find().count();
+  let total = 0;
+  if (!query) {
+    total = await Notice.find({ category: categoryName }).count();
+  } else {
+    total = await Notice.find({
+      category: categoryName,
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { comments: { $regex: query, $options: "i" } },
+        { breed: { $regex: query, $options: "i" } },
+      ],
+    }).count();
+  }
 
   if (!notices) {
     throw new RequestError("Unable to get data from DB.");
