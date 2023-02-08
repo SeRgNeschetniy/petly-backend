@@ -2,8 +2,6 @@ const { generateTokens } = require("../../helpers/generateTokens");
 
 const User = require("../../models/user");
 
-const { BASE_URL, PORT } = process.env;
-
 const google = async (req, res) => {
   const { _id } = req.user;
 
@@ -15,7 +13,7 @@ const google = async (req, res) => {
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });
 
-  res.redirect(`http://localhost:3000/petly-frontend/login?token=${token}`);
+  res.redirect(`https://petly-frontend.vercel.app/login?token=${token}`);
 };
 
 module.exports = google;
