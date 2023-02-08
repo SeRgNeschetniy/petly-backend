@@ -5,7 +5,7 @@ const findNoticeById = async (req, res) => {
   const { id } = req.params;
   const result = await Notice.find({ _id: id }).populate(
     "owner",
-    "email phone"
+    "name email phone"
   );
 
   if (!result) {
