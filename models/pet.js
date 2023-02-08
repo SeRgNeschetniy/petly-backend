@@ -12,13 +12,12 @@ const petsSchema = new Schema(
     dateOfBirth: {
       type: Date,
       required: [true, "YYYY-MM-DD"],
-
     },
     breed: {
       type: String,
       required: [true, "Breed is required"],
       minLength: [2, "Min length 2 characters"],
-      maxlength: [16, "Max length 16 characters"],
+      maxlength: [32, "Max length 32 characters"],
     },
     photoPet: {
       type: String,
