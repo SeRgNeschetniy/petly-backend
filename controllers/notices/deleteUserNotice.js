@@ -6,7 +6,7 @@ const deleteUserNotice = async (req, res) => {
   const { noticeId } = req.params;
   const { _id } = req.user;
 
-  await Notice.findOneAndDelete({ _id: noticeId });
+  await Notice.findOneAndDelete({ _id: noticeId, owner: _id });
 
   const user = await User.updateOne({ _id }, { $pull: { notices: noticeId } });
   if (!user) {
