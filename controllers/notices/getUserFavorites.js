@@ -2,9 +2,9 @@ const User = require("../../models/user");
 const { RequestError } = require("../../helpers/requestError");
 
 const getUserFavorites = async (req, res) => {
-  const { id } = req.user;
+  const { _id } = req.user;
 
-  const user = await User.findById(id).populate("favorites");
+  const user = await User.findById(_id).populate("favorites");
 
   if (!user) {
     throw RequestError("Unable to get Notices.");

@@ -4,14 +4,11 @@ const { RequestError } = require("../../helpers/requestError");
 
 const deleteUserNotice = async (req, res) => {
   const { noticeId } = req.params;
-  const { id: userId } = req.user;
+  const { _id } = req.user;
 
   await Notice.findOneAndDelete(noticeId);
 
-  const user = await User.updateOne(
-    { _id: userId },
-    { $pull: { notices: noticeId } }
-  );
+  const user = await User.updateOne({ _id }, { $pull: { notices: noticeId } });
   if (!user) {
     throw RequestError("Unable to delete Notice");
   }

@@ -4,10 +4,10 @@ const { Notice } = require("../../models/notice");
 
 const addNoticeToFavorites = async (req, res) => {
   const { noticeId } = req.params;
-  const { id: userId } = req.user;
+  const { _id } = req.user;
 
   const user = await User.updateOne(
-    { _id: userId },
+    { _id },
     { $addToSet: { favorites: noticeId } }
   );
 
