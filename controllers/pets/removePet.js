@@ -4,7 +4,7 @@ const removePet = async (req, res) => {
   const { petId } = req.params;
   const { _id: owner } = req.user;
 
-  const removedPet = await Pets.findByOneAndDelete({ _id: petId, owner });
+  const removedPet = await Pets.findOneAndDelete({ _id: petId, owner });
   if (!removedPet) {
     return res
       .status(404)
