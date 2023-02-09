@@ -6,7 +6,6 @@ const deleteUserNotice = async (req, res) => {
   const { noticeId } = req.params;
   const { id: userId } = req.user;
 
-  await User.findOneAndDelete(noticeId);
   await Notice.findOneAndDelete(noticeId);
 
   const user = await User.updateOne(
