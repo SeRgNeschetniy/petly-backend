@@ -48,7 +48,7 @@ const getNoticeByCategory = async (req, res) => {
   if (!notices) {
     throw new RequestError("Unable to get data from DB.");
   }
-  res.status(200).json({ notices, page, limit, total });
+  res.status(200).json({ notices, page, limit, total, category });
 };
 
 module.exports = getNoticeByCategory;
