@@ -33,7 +33,7 @@ const getNoticeByCategory = async (req, res) => {
 
   let total = 0;
   if (!query) {
-    total = await Notice.find({ category: categoryName }).count();
+    total = await Notice.find({ category: category }).count();
   } else {
     total = await Notice.find({
       category: category,
