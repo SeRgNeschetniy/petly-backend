@@ -15,7 +15,7 @@ const getNoticeByCategory = async (req, res) => {
       { category: category },
       { createdAt: 0, updatedAt: 0 },
       { skip, limit }
-    );
+    ).sort({ createdAt: -1 });
   } else {
     notices = await Notice.find(
       {
@@ -28,7 +28,7 @@ const getNoticeByCategory = async (req, res) => {
       },
       { createdAt: 0, updatedAt: 0 },
       { skip, limit }
-    );
+    ).sort({ createdAt: -1 });
   }
 
   let total = 0;
