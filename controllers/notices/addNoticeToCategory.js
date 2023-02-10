@@ -22,6 +22,7 @@ const addNoticeToCategory = async (req, res) => {
 
   const filename = `${nanoid()}_${originalname}`;
   const image = await Jimp.read(tempUpload);
+
   image.resize(336, Jimp.AUTO, Jimp.RESIZE_BEZIER).write(tempUpload);
   const resultUpload = path.join(petsDir, filename);
   await fs.rename(tempUpload, resultUpload);

@@ -20,6 +20,7 @@ const addPet = async (req, res) => {
 
     const image = await Jimp.read(tempUpload);
     image.resize(240, Jimp.AUTO, Jimp.RESIZE_BEZIER).write(tempUpload);
+
     const photoNewPath = path.join(photoDir, fileName);
     await fs.rename(tempUpload, photoNewPath);
     const photoURL = await uploadImage(photoNewPath);
