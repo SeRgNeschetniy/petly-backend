@@ -16,6 +16,7 @@ const uploadImage = async (imagePath) => {
     use_filename: true,
     unique_filename: false,
     overwrite: true,
+    transformation: ["crop_328x328"],
   };
 
   try {

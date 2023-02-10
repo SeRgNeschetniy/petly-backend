@@ -21,11 +21,13 @@ const addNoticeToCategory = async (req, res) => {
   const { title, name, dateOfBirth, breed } = req.body;
 
   const filename = `${nanoid()}_${originalname}`;
-  const image = await Jimp.read(tempUpload);
 
+  const image = await Jimp.read(tempUpload);
   image.resize(336, Jimp.AUTO, Jimp.RESIZE_BEZIER).write(tempUpload);
+
   const resultUpload = path.join(petsDir, filename);
   await fs.rename(tempUpload, resultUpload);
+
   const petImage = await uploadImage(resultUpload);
 
   const notice = await Notice.findOne({ title, name, dateOfBirth, breed });
