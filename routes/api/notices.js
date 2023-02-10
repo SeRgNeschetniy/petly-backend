@@ -20,7 +20,7 @@ router.post(
 router.get("/find/:id", ctrlWrapper(ctrl.findNoticeById));
 router.get("/favorites", authenticate, ctrlWrapper(ctrl.getUserFavorites));
 router.get("/own", authenticate, ctrlWrapper(ctrl.getUserNotices));
-router.get("/:categoryName", ctrlWrapper(ctrl.getNoticeByCategory));
+router.get("/:category", ctrlWrapper(ctrl.getNoticeByCategory));
 
 router.post(
   "/:noticeId/favorites",

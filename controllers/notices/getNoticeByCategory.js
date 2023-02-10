@@ -2,7 +2,7 @@ const { Notice } = require("../../models/notice");
 const { RequestError } = require("../../helpers/requestError");
 
 const getNoticeByCategory = async (req, res) => {
-  const { categoryName } = req.params;
+  const { category } = req.params;
   let { page = 1, limit = 8, query } = req.query;
 
   const skip = (parseInt(page) - 1) * limit;
@@ -12,14 +12,14 @@ const getNoticeByCategory = async (req, res) => {
 
   if (!query) {
     notices = await Notice.find(
-      { category: categoryName },
+      { category: category },
       { createdAt: 0, updatedAt: 0 },
       { skip, limit }
     );
   } else {
     notices = await Notice.find(
       {
-        category: categoryName,
+        category: category,
         $or: [
           { title: { $regex: query, $options: "i" } },
           { comments: { $regex: query, $options: "i" } },
@@ -36,7 +36,7 @@ const getNoticeByCategory = async (req, res) => {
     total = await Notice.find({ category: categoryName }).count();
   } else {
     total = await Notice.find({
-      category: categoryName,
+      category: category,
       $or: [
         { title: { $regex: query, $options: "i" } },
         { comments: { $regex: query, $options: "i" } },
